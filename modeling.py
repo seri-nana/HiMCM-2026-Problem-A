@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 
 # Load and preprocess data from the CSV
-def load_data(file_path, criteria_indices):
-    df = pd.read_csv(file_path)
+def load_data(criteria_indices):
+    df = pd.read_csv("HiMCM Cities Data - Sheet1.csv", index_col=0)
     data = df.iloc[criteria_indices].T[1:].astype(float).values
     return data, df.columns[1:].tolist()
 
@@ -29,8 +29,8 @@ def topsis(data, weights, maximize_criteria=None):
     return relative_closeness
 
 # Example Analysis function
-def analyze_topsis(file_path, criteria_indices, weights, maximize_criteria):
-    data, city_names = load_data(file_path, criteria_indices)
+def analyze_topsis(criteria_indices, weights, maximize_criteria):
+    data, city_names = load_data(criteria_indices)
     rel_closeness = topsis(data, weights, maximize_criteria)
     
     ranked_cities = sorted(zip(city_names, rel_closeness), key=lambda x: x[1], reverse=True)
@@ -41,10 +41,10 @@ def analyze_topsis(file_path, criteria_indices, weights, maximize_criteria):
 
 """
 # Running the example
-file_path = 'HiMCM Cities Data - Sheet1.csv'
+file_path = 'HiMCM Cities Data - Sheet1.csv' (taken out.)
 criteria_indices = [5, 8, 9, 10]  # Example indices for safety-related metrics
-weights = [1, 1, 1, 1]  # Hypothetical uniform weights for demonstration
-maximize_criteria = [False, True, True, True]  # Minimize crime, maximize others
+weights = [1, 1, 1, 1]  # Hypothetical uniform weights for demonstration  from entropy.
+maximize_criteria = [False, True, True, True]  # Minimize crime - False, maximize others - True
 
-analyze_topsis(file_path, criteria_indices, weights, maximize_criteria)
+analyze_topsis(criteria_indices, weights, maximize_criteria)
 """
