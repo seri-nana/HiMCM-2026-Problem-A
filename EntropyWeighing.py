@@ -172,3 +172,78 @@ print("Crime:", crime_entropy)
 print("Police:", police_entropy)
 print("Firefighter:", firefighter_entropy)
 print("Medical:", medical_entropy)
+
+
+def doEntropy(df_subtopic, positive_list):
+    '''
+    df_subtopic: dataframe with cities as rows, subtopics as columns. 
+        encapsulates data for one topic.
+    positive_list:
+        True = higher is better
+        False = lower is better
+    '''
+    
+    # Normalize each subtopic
+    normalized_data = {}
+
+    for j, column in enumerate(df_subtopic.columns):
+        values = pd.to_numeric(df_subtopic[column]).tolist()
+
+        normalized_data[column] = normalize(
+            values,
+            positive=positive_list[j]
+        )
+
+    #make a normalized matrix in case need to return.
+    normalized_matrix = pd.DataFrame(
+        normalized_data,
+        index=df_subtopic.index
+    )
+
+    # Proportional contributions
+    proportional_data = {}
+
+    for column in normalized_matrix.columns:
+        proportional_data[column] = prop_contrib(
+            normalized_matrix[column].tolist()
+        )
+
+    proportional_matrix = pd.DataFrame(
+        proportional_data,
+        index=df_subtopic.index
+    )
+
+    # Entropy for each subtopic
+    entropy = {}
+
+    for column in proportional_matrix.columns:
+        entropy[column] = calculate_entropy(
+            proportional_matrix[column].tolist()
+        )
+
+    entropy = pd.Series(entropy)
+
+    # Step 4: Calculate diversity coefficients
+    diversity = 1 - entropy
+
+    # Step 5: Calculate entropy weights
+    if diversity.sum() == 0:
+        weights = diversity * 0 + 1 / len(diversity)
+    else:
+        weights = diversity / diversity.sum()
+
+    # return normalized_matrix, proportional_matrix, entropy, diversity, weights
+
+    return entropy
+
+safety_entropy = doEntropy(df_safety, [False, True, True, True])
+print("HERE!")
+print(safety_entropy)
+'''
+entropy is a dictionary. 
+{subtopic1: entropy1,
+ subtopic2: entropy2, 
+ subtopic3: entropy3,
+ subtopic4: entropy4}
+
+'''
