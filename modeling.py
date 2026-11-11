@@ -39,8 +39,9 @@ def analyze_topsis(criteria_indices, weights, maximize_criteria):
     print("TOPSIS Ranking for Safety:")
         for rank, (city, score) in enumerate(ranked_cities, 1):
             print(f"{rank}. {city}: {score:.4f}")
-    return ranked_cities
+    
     '''
+    return ranked_cities
 """
 # Running the example
 file_path = 'HiMCM Cities Data - Sheet1.csv' (taken out.)

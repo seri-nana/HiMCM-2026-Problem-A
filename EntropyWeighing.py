@@ -252,3 +252,5 @@ entropy is a dictionary.
  subtopic4: entropy4}
 
 '''
+
+#take out print statements b/c they show in import.

@@ -48,9 +48,60 @@ def objTopicScore(criteria_indices, df_subtopic, maximize_criteria):
 
     return obj_topic_scores
 
-#obj scores
+#obj scores. Need to do for economy, transportation, and education.
+print("here!!")
 safety_obj_score = objTopicScore(safety_criteria_indices, df_safety, safety_pos)
 print(safety_obj_score)
 
 
+## Here, assuming we have the 4 numbers
+# e.g.
+# Safety, Economy, Transportation, Education
+ahp_weights = [0.40, 0.20, 0.15, 0.25]
 
+# Multiply safety ahp weight to safety score to get subjectively weighted score
+# Do for other 3
+# Add them. to get final score for city.
+
+#CHECK THIS LATER!!!!!!!!
+
+def calculate_final_scores(
+    safety_scores,
+    economy_scores,
+    transportation_scores,
+    education_scores,
+    ahp_weights
+):
+    # Convert each list of tuples into dictionaries
+    safety = dict(safety_scores)
+    economy = dict(economy_scores)
+    transportation = dict(transportation_scores)
+    education = dict(education_scores)
+
+    # Get city names
+    cities = safety.keys()
+
+    final_scores = {}
+
+    for city in cities:
+        score = (
+            ahp_weights[0] * safety[city] +
+            ahp_weights[1] * economy[city] +
+            ahp_weights[2] * transportation[city] +
+            ahp_weights[3] * education[city]
+        )
+
+        final_scores[city] = score
+
+    # Rank cities from highest to lowest
+    ranked_cities = sorted(
+        final_scores.items(),
+        key=lambda x: x[1],
+        reverse=True
+    )
+
+    return ranked_cities
+
+
+
+# Before running, must create the economy, transport, and education scores.
