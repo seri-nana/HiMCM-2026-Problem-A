@@ -223,10 +223,13 @@ def doEntropy(df_subtopic, positive_list):
 
     entropy = pd.Series(entropy)
 
-    # Step 4: Calculate diversity coefficients
+    # Calculate diversity coefficients
+    # entropy: 0 is high contrast, 1 is low contrast.
+    # diversity: 0 is low contrast, 1 is high contrast
     diversity = 1 - entropy
 
-    # Step 5: Calculate entropy weights
+    # Calculate entropy weights
+    # Normalize diversity so it sums to one, these normalized values are weights
     if diversity.sum() == 0:
         weights = diversity * 0 + 1 / len(diversity)
     else:
@@ -234,7 +237,7 @@ def doEntropy(df_subtopic, positive_list):
 
     # return normalized_matrix, proportional_matrix, entropy, diversity, weights
 
-    return entropy
+    return weights
 
 safety_entropy = doEntropy(df_safety, [False, True, True, True])
 print("HERE!")
