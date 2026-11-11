@@ -1,101 +1,50 @@
 import pandas as pd
 import numpy as np
 
-# Load and inspect the CSV file for alignment
-path = 'C:\\Users\\abrar\\Downloads\\HIMCM\\HiMCM Cities Data - Sheet1.csv'
-df = pd.read_csv(path)
+# Load and preprocess data from the CSV
+def load_data(file_path, criteria_indices):
+    df = pd.read_csv(file_path)
+    data = df.iloc[criteria_indices].T[1:].astype(float).values
+    return data, df.columns[1:].tolist()
 
-# Check row indices carefully in alignment with what was pasted
-crime_index = pd.to_numeric(df.iloc[5][1:], errors='coerce')
-police_to_civ = pd.to_numeric(df.iloc[8][1:], errors='coerce')
-firefighter_to_civ = pd.to_numeric(df.iloc[9][1:], errors='coerce')
-medical_to_civ = pd.to_numeric(df.iloc[10][1:], errors='coerce')
+# Generalized TOPSIS function
+def topsis(data, weights, maximize_criteria=None):
+    if maximize_criteria is None:
+        maximize_criteria = [True] * data.shape[1]
 
-# Print extracted data to verify correct procedure
-print(f"Crime Index Raw: {crime_index}")
-print(f"Police to Civ Raw: {police_to_civ}")
-print(f"Firefighter to Civ Raw: {firefighter_to_civ}")
-print(f"Medical to Civ Raw: {medical_to_civ}")
+    def normalize(values, maximize):
+        min_val, max_val = min(values), max(values)
+        return [(v - min_val) / (max_val - min_val) if maximize else (max_val - v) / (max_val - min_val) for v in values]
 
-# Trace and validate potential nulls, correct logic here
-valid_indices = (
-    crime_index.notna() & 
-    police_to_civ.notna() & 
-    firefighter_to_civ.notna() & 
-    medical_to_civ.notna()
-)
+    norm_data = np.array([normalize(data[:, i], maximize_criteria[i]) for i in range(data.shape[1])]).T
+    weighted_data = norm_data * weights
 
-# Capture valid city names and data with the correct indexing
-city_names = df.columns[1:][valid_indices].tolist()  # Skip "Cities" header
-crime_index = crime_index[valid_indices].tolist()
-police_to_civ = police_to_civ[valid_indices].tolist()
-firefighter_to_civ = firefighter_to_civ[valid_indices].tolist()
-medical_to_civ = medical_to_civ[valid_indices].tolist()
+    ideal_solution = np.max(weighted_data, axis=0)
+    negative_ideal_solution = np.min(weighted_data, axis=0)
 
-# Check dataset length validation to prevent loss
-print(f"Valid Cities: {len(city_names)}, Data Points per Category: {len(crime_index)}, {len(police_to_civ)}, {len(firefighter_to_civ)}, {len(medical_to_civ)}")
+    dist_to_ideal = np.sqrt(np.sum((weighted_data - ideal_solution) ** 2, axis=1))
+    dist_to_negative_ideal = np.sqrt(np.sum((weighted_data - negative_ideal_solution) ** 2, axis=1))
+    relative_closeness = dist_to_negative_ideal / (dist_to_ideal + dist_to_negative_ideal)
 
-# Define normalization with the correct framework for options
-def normalize(values, invert=False):
-    min_val, max_val = min(values), max(values)
-    normalized = [
-        (1 - (x - min_val) / (max_val - min_val)) if invert else ((x - min_val) / (max_val - min_val))
-        for x in values
-    ]
-    return normalized
+    return relative_closeness
 
-# Normalize for criteria and invert crime index
-crime_index_norm = normalize(crime_index, invert=True)
-police_to_civ_norm = normalize(police_to_civ)
-firefighter_to_civ_norm = normalize(firefighter_to_civ)
-medical_to_civ_norm = normalize(medical_to_civ)
+# Example Analysis function
+def analyze_topsis(file_path, criteria_indices, weights, maximize_criteria):
+    data, city_names = load_data(file_path, criteria_indices)
+    rel_closeness = topsis(data, weights, maximize_criteria)
+    
+    ranked_cities = sorted(zip(city_names, rel_closeness), key=lambda x: x[1], reverse=True)
+    
+    print("TOPSIS Ranking for Safety:")
+    for rank, (city, score) in enumerate(ranked_cities, 1):
+        print(f"{rank}. {city}: {score:.4f}")
 
-# Weights equalized
-weights = np.array([1, 1, 1, 1])
+"""
+# Running the example
+file_path = 'HiMCM Cities Data - Sheet1.csv'
+criteria_indices = [5, 8, 9, 10]  # Example indices for safety-related metrics
+weights = [1, 1, 1, 1]  # Hypothetical uniform weights for demonstration
+maximize_criteria = [False, True, True, True]  # Minimize crime, maximize others
 
-# Calculate weighted normalized values
-weighted_crime_index = np.array(crime_index_norm) * weights[0]
-weighted_police_to_civ = np.array(police_to_civ_norm) * weights[1]
-weighted_firefighter_to_civ = np.array(firefighter_to_civ_norm) * weights[2]
-weighted_medical_to_civ = np.array(medical_to_civ_norm) * weights[3]
-
-# Ideal and negative-ideal solutions
-ideal_solution = np.array([
-    max(weighted_crime_index), 
-    max(weighted_police_to_civ),
-    max(weighted_firefighter_to_civ), 
-    max(weighted_medical_to_civ)
-])
-negative_ideal_solution = np.array([
-    min(weighted_crime_index), 
-    min(weighted_police_to_civ), 
-    min(weighted_firefighter_to_civ), 
-    min(weighted_medical_to_civ)
-])
-
-# Euclidean distance calculation improvements
-def distance_to_ideal(point, ideal):
-    return np.sqrt(np.sum((point - ideal) ** 2))
-
-dist_to_ideal = [
-    distance_to_ideal([c, p, f, m], ideal_solution)
-    for c, p, f, m in zip(weighted_crime_index, weighted_police_to_civ, weighted_firefighter_to_civ, weighted_medical_to_civ)
-]
-dist_to_negative_ideal = [
-    distance_to_ideal([c, p, f, m], negative_ideal_solution) 
-    for c, p, f, m in zip(weighted_crime_index, weighted_police_to_civ, weighted_firefighter_to_civ, weighted_medical_to_civ)
-]
-
-# Closeness calculation refinement
-relative_closeness = [
-    n / (i + n) if (i + n) > 0 else 0 for i, n in zip(dist_to_ideal, dist_to_negative_ideal)
-]
-
-# Final city rankings
-topsis_results = list(zip(city_names, relative_closeness))
-topsis_results.sort(key=lambda x: x[1], reverse=True)
-
-# Print the comprehensive rankings with all available cities
-print("TOPSIS Ranking for Safety Across All Captured Cities:")
-for rank, (city, score) in enumerate(topsis_results, 1):
-    print(f"{rank}. {city}: {score:.4f}")
+analyze_topsis(file_path, criteria_indices, weights, maximize_criteria)
+"""
