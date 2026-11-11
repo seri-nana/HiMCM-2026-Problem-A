@@ -226,7 +226,7 @@ def doEntropy(df_subtopic, positive_list):
     # Calculate diversity coefficients
     # entropy: 0 is high contrast, 1 is low contrast.
     # diversity: 0 is low contrast, 1 is high contrast
-    diversity = 1 - entropy
+    diversity = 1 - entropy # diversity is a panda
 
     # Calculate entropy weights
     # Normalize diversity so it sums to one, these normalized values are weights
@@ -239,8 +239,10 @@ def doEntropy(df_subtopic, positive_list):
 
     return weights
 
-safety_entropy = doEntropy(df_safety, [False, True, True, True])
+
 print("HERE!")
+safety_entropy = doEntropy(df_safety, [False, True, True, True])
+print("HERE!!!")
 print(safety_entropy)
 '''
 entropy is a dictionary. 

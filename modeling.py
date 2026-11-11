@@ -34,11 +34,13 @@ def analyze_topsis(criteria_indices, weights, maximize_criteria):
     rel_closeness = topsis(data, weights, maximize_criteria)
     
     ranked_cities = sorted(zip(city_names, rel_closeness), key=lambda x: x[1], reverse=True)
-    
-    print("TOPSIS Ranking for Safety:")
-    for rank, (city, score) in enumerate(ranked_cities, 1):
-        print(f"{rank}. {city}: {score:.4f}")
 
+    '''
+    print("TOPSIS Ranking for Safety:")
+        for rank, (city, score) in enumerate(ranked_cities, 1):
+            print(f"{rank}. {city}: {score:.4f}")
+    return ranked_cities
+    '''
 """
 # Running the example
 file_path = 'HiMCM Cities Data - Sheet1.csv' (taken out.)
