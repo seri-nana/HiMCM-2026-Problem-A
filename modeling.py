@@ -14,6 +14,10 @@ def topsis(data, weights, maximize_criteria=None):
 
     def normalize(values, maximize):
         min_val, max_val = min(values), max(values)
+
+        if max_val == min_val:
+            return [0] * len(values)
+
         return [(v - min_val) / (max_val - min_val) if maximize else (max_val - v) / (max_val - min_val) for v in values]
 
     norm_data = np.array([normalize(data[:, i], maximize_criteria[i]) for i in range(data.shape[1])]).T
