@@ -81,7 +81,8 @@ def objTopicScore(criteria_indices, df_subtopic, maximize_criteria):
     return obj_topic_scores
 
 #obj scores. Need to do for economy, transportation, and education.
-print("here!!")
+if __name__ == "__main__":
+    print("here!!")
 safety_obj_score = objTopicScore(safety_criteria_indices, df_safety, safety_pos)
 #print(safety_obj_score)
 economy_obj_score = objTopicScore(economy_criteria_indices, df_economy, economy_pos)
@@ -92,7 +93,7 @@ education_obj_score = objTopicScore(education_criteria_indices, df_education, ed
 # e.g.
 # Safety, Economy, Transportation, Education
 #ahp_weights = [0.40, 0.20, 0.15, 0.25]
-ahp_weights = [0.20, 0.20, 0.20, 0.20]
+ahp_weights = [0.25, 0.25, 0.25, 0.25]
 
 # Multiply safety ahp weight to safety score to get subjectively weighted score
 # Do for other 3
@@ -140,16 +141,16 @@ def calculate_final_scores(
 ranked_cities = calculate_final_scores(safety_obj_score, economy_obj_score, transport_obj_score, education_obj_score, ahp_weights)
 
 #print(ranked_cities)
+if __name__ == "__main__":
+    print("\nFINAL CITY RANKINGS")
+    print("-" * 45)
+    print(f"{'Rank':<8}{'City':<25}{'Final Score':>12}")
+    print("-" * 45)
 
-print("\nFINAL CITY RANKINGS")
-print("-" * 45)
-print(f"{'Rank':<8}{'City':<25}{'Final Score':>12}")
-print("-" * 45)
+    for rank, (city, score) in enumerate(ranked_cities, 1):
+        print(f"{rank:<8}{city:<25}{score:>12.4f}")
 
-for rank, (city, score) in enumerate(ranked_cities, 1):
-    print(f"{rank:<8}{city:<25}{score:>12.4f}")
-
-print("-" * 45)
+    print("-" * 45)
 
 
 # Before running, must create the economy, transport, and education scores.
