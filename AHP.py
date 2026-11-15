@@ -10,10 +10,10 @@ the 4 weights we decide.
 
 '''
 
-import csv
+#import csv
 import numpy as np
-import scipy
-from pprint import pprint
+#import scipy
+#from pprint import pprint
 import pandas as pd
 
 from EntropyWeighing import doEntropy
@@ -86,14 +86,20 @@ if __name__ == "__main__":
 safety_obj_score = objTopicScore(safety_criteria_indices, df_safety, safety_pos)
 #print(safety_obj_score)
 economy_obj_score = objTopicScore(economy_criteria_indices, df_economy, economy_pos)
+#print(economy_obj_score)
 transport_obj_score = objTopicScore(transport_criteria_indices, df_transport, transport_pos)
+#print(transport_obj_score)
 education_obj_score = objTopicScore(education_criteria_indices, df_education, education_pos)
+print(education_obj_score)
+
 
 ## Here, assuming we have the 4 numbers
 # e.g.
 # Safety, Economy, Transportation, Education
 #ahp_weights = [0.40, 0.20, 0.15, 0.25]
-ahp_weights = [0.25, 0.25, 0.25, 0.25]
+#ahp_weights = [0.25, 0.25, 0.25, 0.25]
+#ahp_weights = [0.35, 0.28, 0.25, 0.12]
+ahp_weights = [0.4710, 0.2840, 0.0736, 0.1715]
 
 # Multiply safety ahp weight to safety score to get subjectively weighted score
 # Do for other 3

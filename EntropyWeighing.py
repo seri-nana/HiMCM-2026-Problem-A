@@ -3,9 +3,9 @@
     # pip install pandas numpy scipy
     # in terminal
 import pandas as pd
-import csv
+#import csv
 import numpy as np
-import scipy
+#import scipy
 from pprint import pprint
 
 #Read Google Sheets
@@ -22,7 +22,9 @@ if __name__ == "__main__":
         ]
     ].T
 
+    print("data", "="*25)
     print(df_safety.head())
+    print("="*25, "\n\n")
 
 
     #list of cities
@@ -151,9 +153,12 @@ if __name__ == "__main__":
 # Calculate informational entropy (e j)
 
 def calculate_entropy(prop_list):
-    n = len(prop_list) #n is number of cities. should be 15
+    n = len(prop_list)
 
-    #np.log(p) calculates ln(p)
+    # If all proportional contributions are zero,
+    # the original normalized data had no variation.
+    if sum(prop_list) == 0:
+        return 1
 
     entropy_sum = sum(
         p * np.log(p) for p in prop_list if p > 0
@@ -256,3 +261,4 @@ entropy is a dictionary.
 '''
 
 #take out print statements b/c they show in import.
+
