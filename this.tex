@@ -1,0 +1,1408 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.85in,headheight=15pt,headsep=12pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{xurl}
+\usepackage[table]{xcolor}
+\usepackage{listings}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{changepage}\usepackage{needspace,newtxtext,newtxmath,microtype,amsmath,booktabs,longtable,tabularx,array,graphicx,wrapfig,float,caption,fancyhdr,hyperref,enumitem,xurl,tocloft}
+% Use standard typewriter font for URLs to avoid missing MiKTeX t1xtt metrics.
+\renewcommand{\ttdefault}{cmtt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+% Underline clickable URL text and explicitly authored hyperlinks.
+\usepackage[normalem]{ulem}
+\let\originalhref\href
+\renewcommand{\href}[2]{\originalhref{#1}{\uline{#2}}}
+\def\UrlLeft{}
+\def\UrlRight{}
+\setlength{\parindent}{1.35em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{5em}
+\Urlmuskip=0mu plus 2mu\relax
+\setlength{\textfloatsep}{10pt}
+\setlength{\intextsep}{8pt}
+\renewcommand{\arraystretch}{1.12}
+\captionsetup{font=small,labelfont=bf,skip=5pt,justification=centering,singlelinecheck=false}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Team 19236}\fancyhead[R]{\small Page \thepage}\renewcommand{\headrulewidth}{0.35pt}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0pt}{2.0ex plus .5ex}{0.8ex}{\normalfont\fontsize{16}{19}\selectfont\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0pt}{1.5ex plus .4ex}{0.5ex}{\normalfont\fontsize{12}{15}\selectfont\bfseries}}
+\makeatother
+% Main sections stand out more than subsections in the contents page.
+\renewcommand{\cftsecfont}{\bfseries\large}
+\renewcommand{\cftsecpagefont}{\bfseries\large}
+\renewcommand{\cftsubsecfont}{\normalfont\normalsize}
+\renewcommand{\cftsubsecpagefont}{\normalfont\normalsize}
+\setlength{\cftbeforesecskip}{9pt}
+\setlength{\cftbeforesubsecskip}{2.5pt}
+\setlength{\cftsecnumwidth}{2.3em}
+\setlength{\cftsubsecindent}{2.3em}
+\setlength{\cftsubsecnumwidth}{3.1em}
+\linespread{1.022}\selectfont
+\usepackage{enumitem}
+\begin{document}
+\fontsize{11.3}{13.75}\selectfont
+\hypertarget{summary-sheet}{}\label{tocentry:0-0}
+\thispagestyle{empty}
+\vspace*{-0.38in}
+\begin{center}
+\vspace*{0pt}
+{\small Team Control Number\par}
+{\fontsize{20}{22}\selectfont\bfseries\textcolor{red}{19236}\par}
+\vspace{-3pt}
+{\small Problem Chosen\par}
+{\fontsize{20}{22}\selectfont\bfseries\textcolor{red}{A}\par}
+{\bfseries 2026\par}
+{\bfseries HiMCM/MidMCM\par}
+{\bfseries Summary Sheet\par}
+\end{center}
+\vspace{-0.14in}
+\noindent\rule{\textwidth}{0.25pt}\par\vspace{0.10in}
+\begingroup
+\setlength{\parindent}{1.1em}
+\setlength{\parskip}{0.28em}
+\fontsize{10.6}{13.35}\selectfont
+\setlength{\lineskiplimit}{0pt}
+COMAP is tasked with determining the best city for a high schooler to live in. Selecting the most suitable city to live in is a complex decision that involves balancing numerous economic, social, and infrastructural factors. While some cities may excel in certain areas, they may perform poorly in others, making direct comparisons difficult. Thus, we develop a systematic evaluation method that considers how well a city performs with regards to safety, transportation, economy, and education while recognizing their differing levels of importance.\par
+
+We begin by establishing a set of main evaluation criteria, each consisting of several measurable subcriteria, such as the perceived cost of living as well as the transportation density. To choose these subcriteria, our group considered the relative effect that the subcriteria would have on a high schooler's life as well as the availability of data. Our group identified a list of 20 cities to rank, including Seattle, USA, Ottawa, Canada, and Seoul, South Korea, based on geographic variety while also prioritizing consistent standards of data on the subcriteria we chose.
+
+After identifying eligible cities and collecting the corresponding data, we organize the information into decision matrices. To account for differences in measurement units and indicator characteristics, we classify the data according to whether higher or lower values represent more desirable outcomes.
+
+Using this data, we apply the Entropy Weight Method to determine the relative weights of subcriteria within each main criterion. By measuring the variation in data across cities, this method assigns greater weight to subcriteria that provide more information for distinguishing between alternatives. The resulting weights are then incorporated directly into Technique for Order Preference to Ideal Solution (TOPSIS), which evaluates each city's relative distance from the ideal and negative-ideal solutions. We incorporated entropy weighting with TOPSIS so that TOPSIS does not weigh every subcriterion equally, instead it weighs the subcriteria with the most discriminatory data. This produces a performance score for every city under each main criterion.
+
+To combine these criterion-level evaluations, we use (Analytical Hierarchy Process(AHP) to determine the relative importance of the main criteria through pairwise comparisons. After verifying the consistency of these comparisons, we calculate an overall score for each city by taking the weighted sum of its criterion-level TOPSIS scores. These scores allow us to rank the candidate cities and identify the most suitable alternatives.
+
+Our model identified Bern, Switzerland as the best city for a high-schooler among the 20 cities evaluated, with a score of 0.5623, followed by Paris, France (0.5265) and Zurich, Switzerland (0.5096). Our model identified San Jose as the worst city for high schoolers to live in, with a score of 0.2522, while Shanghai, China was the penultimate with a score of 0.2662 and London was third to last with a score of 0.2720.
+
+By comparing the criterion scores for cities to how they rank in the end, it is observed that cities that score well in one category but score worse in others tend to fall on the low end of the overall ranking. For example, London is ranked 18th but received a score of 0.94 in transportation. London received scores of less than 0.4 in the other 3 categories, however. This highlights the ability of our model to rank cities on how well they consistently perform across all four categories, instead of being overly dependent on the score of one category.
+
+We then tested our model's sensitivity using three Monte Carlo simulations, in which we perturbed the AHP weights by 5\%, 10\%, and 15\%. The simulation showed that the mean simulated scores remained close to the original scores and our city rankings remained the same. Bern retained the highest mean score at each tested level of variation, indicating how despite fluctuations in the AHP weights, which were calculated by our team's determination of the relative importance of factors, Bern consistently performs well. Thus, Bern remains as our primary choice.
+\par
+\endgroup
+\clearpage
+
+\begin{center}{\Large\bfseries Table of Contents}\end{center}
+\vspace{0.85em}
+\begingroup
+\hypersetup{linkcolor=black}
+\small
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\vspace{0.94em}
+\noindent\hyperlink{summary-sheet}{\textbf{0\quad Summary Sheet}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{1}\par
+\vspace{0.94em}
+\noindent\hyperlink{news-article}{\textbf{News Article}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{3}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:1-0]{\textbf{1\quad Introduction}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:1-0}}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:2-0]{\textbf{2\quad Question Analysis and Problem Restatement}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:2-0}}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:3-0]{\textbf{3\quad Assumptions and Justifications}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:3-0}}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:4-0]{\textbf{4\quad Part 1: Elements of Our Model}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:4-0}}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:4-1]{4.1\quad Candidate City Identification and Screening}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:4-1}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:4-2]{4.2\quad Main Criteria and Subcriteria}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:4-2}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:4-3]{4.3\quad Data Collection and Indicator Selection}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:4-3}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:4-4]{4.4\quad Data Preprocessing}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:4-4}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:5-0]{\textbf{5\quad Part 2: Hierarchical City Evaluation Model}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:5-0}}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:5-1]{5.1\quad Variables}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:5-1}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:5-2]{5.2\quad Model Overview}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:5-2}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:5-3]{5.3\quad Entropy-Based subcriteria Weighting}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:5-3}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:5-4]{5.4\quad Entropy-Weighted TOPSIS Evaluation}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:5-4}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:5-5]{5.5\quad AHP Evaluation for Main Criteria}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:5-5}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:5-6]{5.6\quad City-Scoring}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:5-6}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:6-0]{\textbf{6\quad Part 3: Application of Our Model}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:6-0}}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:6-1]{6.1\quad Calculation of Entropy Weights}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:6-1}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:6-2]{6.2\quad TOPSIS Evaluation}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:6-2}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:6-3]{6.3\quad AHP Weight Calculation and Consistency Verification}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:6-3}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:6-4]{6.4\quad Final City Rankings and Interpretation of Results}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:6-4}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:7-0]{\textbf{7\quad Strengths and Weaknesses}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:7-0}}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:7-1]{7.1\quad Strengths}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:7-1}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:7-2]{7.2\quad Weaknesses}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:7-2}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:8-0]{\textbf{8\quad Part IV: Model Expansion and Robustness Analysis}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:8-0}}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:8-1]{8.1\quad Monte Carlo Simulation of Weight Uncertainty}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:8-1}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:8-2]{8.2\quad Ranking Stability and Robustness}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:8-2}\par
+\vspace{0.42em}
+\noindent\hspace*{1.7em}\hyperref[tocentry:8-3]{8.3\quad Model Expansion}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\pageref{tocentry:8-3}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:9-0]{\textbf{9\quad Final Recommendations}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:9-0}}\par
+\vspace{0.94em}
+\noindent\hyperref[tocentry:10-0]{\textbf{10\quad References}}\nobreak\leaders\hbox to .65em{\hss.\hss}\hfill\nobreak\textbf{\pageref{tocentry:10-0}}\par
+\endgroup
+\clearpage
+
+\hypertarget{news-article}{}
+\begingroup
+\fontsize{11}{15.3}\selectfont
+\section*{Here's Why You Should Bern That Return Ticket}
+\par\noindent\includegraphics[width=\textwidth,keepaspectratio]{article1.png}\par
+\vspace{0.35em}
+
+\par\indent For teenagers, a city is more than a collection of landmarks and glittering skylines. It is the crowded morning commute to school, the novelty of exploring a new corner of the city without a parent's car keys, the spontaneous detour to an ice cream shop after a particularly brutal exam, and the late-night walk home after an evening spent with friends. Beneath the appeal of iconic skylines and bustling streets lie the quieter realities of everyday life: whether a teenager can walk home alone without looking over their shoulder or explore the city without depending on someone else to get them there. These considerations rarely find their way onto travel brochures yet they can make all the difference between a city that is exciting to visit and one that is truly worth growing up in.
+
+\par\indent But how do we measure something as personal and complex as the experience of growing up in a city? We began by considering what teenagers actually need from their surroundings. While factors such as climate, cultural attractions, and nightlife certainly contribute to a city's appeal, we found them too dependent on personal preference or less essential to a teenager's overall well-being. Instead, we narrowed our focus to four categories: safety, economy, education, and transportation. Together, they capture whether teenagers feel secure, access opportunities, and afford everyday necessities.
+
+\par\indent We first divided our four main criteria---safety, economy, education, and transportation---into smaller, measurable subcriteria that capture specific aspects of each category and gathered data from cities around the world. Starting with 24 cities recognized in international rankings of education, transportation, safety, and economic conditions, we narrowed our selection to 20, aiming for geographic coverage while screening for reliable, relevant, and comparable data.
+
+\par\indent Of course, identifying what matters is only half the challenge. Determining how much each factor matters is where mathematics comes into the picture. With our candidates established, we first used entropy weighting to give more importance to subcriteria that showed greater differences between cities. Next, Technique for Order of Preference by Similarity to Ideal Solution (TOPSIS) combined these weighted subcriteria to evaluate each city's performance within the four main criteria, measuring how closely it approached ideal conditions and how far it stood from the worst. Finally, we used the Analytic Hierarchy Process (AHP) to compare our four main categories two at a time, deciding which mattered more to a teenager's quality of life and by how much. These comparisons helped us assign each criterion a weight, determining how strongly it influenced a city's final score.
+
+\par\indent Safety ultimately received the greatest weight of approximately 47\%, followed by the economy at 28\%, with education and transportation accounting for the remainder. By combining these weights with each city's performance across the four criteria, we arrived at our final rankings. And after all that number-crunching, one city came out on top: Bern, Switzerland.
+
+\par\indent As Switzerland's capital and a major urban center, Bern offers far more than picturesque streets and Alpine scenery. Our findings suggest that its appeal lies not in any single extraordinary feature, but in the conditions that make everyday life more manageable for adolescent residents.
+
+\par\medskip
+\noindent We have found the following rankings of the 20 cities:
+\begin{center}
+\vspace{0.55em}
+\fontsize{10.5}{14}\selectfont
+\setlength{\tabcolsep}{13pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{r l r l}
+\toprule
+\textbf{Rank} & \textbf{City, Country} & \textbf{Rank} & \textbf{City, Country} \\
+\midrule
+1 & Bern, Switzerland & 11 & Seattle, USA \\
+2 & Paris, France & 12 & Seoul, South Korea \\
+3 & Zurich, Switzerland & 13 & Hong Kong, SAR of China \\
+4 & Abu Dhabi, UAE & 14 & Taipei, Taiwan \\
+5 & Tokyo, Japan & 15 & Boston, USA \\
+6 & Munich, Germany & 16 & New York, USA \\
+7 & Melbourne CBD, Australia & 17 & Vancouver, Canada \\
+8 & Ottawa, Canada & 18 & London, UK \\
+9 & Reykjavik, Iceland & 19 & Shanghai, China \\
+10 & Singapore, Singapore & 20 & San Jose, USA \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\par\indent Of course, declaring one city the best place to grow up is bound to raise a few eyebrows. After all, can even a carefully constructed mathematical model truly capture the complexities of teenage life? Not entirely. Our model cannot fully account for personal experiences, cultural differences, or the friendships that make a place feel like home. Moreover, our rankings depend on the availability of data and the importance assigned to each category.
+
+\par\indent So, should you start packing your bags? Perhaps not just yet. But if you're searching for a city where affordability, transportation convenience, opportunity, and security can coexist, Bern might be worth more than a visit. You may want to Bern that return ticket after all.
+
+\endgroup
+\clearpage
+\section{Introduction}\label{tocentry:1-0}
+
+\par
+
+Have you fed one too many pigeons? Do they follow you down the street? Or, perhaps, have you ever walked down the street, completely minding your own business, when you notice out of the corner of your eye what seems like a gray object careening towards your head, to notice that a pigeon narrowly missed you? While seemingly unimportant, small inconveniences such as ballistic pigeons have small effects on the moods of high schoolers in New York City.
+
+\par
+
+Similarly, in cities around the world, high schoolers face various problems of their own, whether that's missing the bus and seeing that the next one has somehow managed to be delayed by 37 minutes, or wanting to buyTruFru at their local deli and seeing that the price increased by another two dollars, and they're short on cash once again.
+
+\par
+
+It is not particularly controversial to suggest that most people would prefer to live in a good city rather than a bad one. Unfortunately, determining what makes a city ``good'' is not quite as straightforward. Some value safety, others prioritize economic opportunities, and a select few may even enjoy spending hours in traffic. Since cities rarely excel in every category, identifying the best one requires more than simply comparing crime rates or counting subway stations.
+
+\par
+
+To address this challenge, we developed a mathematical model that evaluates cities based on four main criteria: safety, transportation, economy, and education. By combining entropy weighting, the Technique for Order Preference by Similarity to Ideal Solution (TOPSIS), and the Analytic Hierarchy Process (AHP), our model accounts for differences in data and the relative importance of each criterion. Ultimately, we aim to provide a systematic method for comparing cities, since asking everyone to agree on what makes a city ideal would likely take considerably longer.
+
+\section{Question Analysis and Problem Restatement}\label{tocentry:2-0}
+
+
+High school is a period of development for teenagers, a segue between childhood and 
+adulthood. COMAP faces the challenge of deciding which city is the best for high schoolers to 
+live in, in reflection of the current social and economic conditions. This is important because the 
+environment that high schoolers grow up in has a large impact on their values and the 
+opportunities available to them as they enter adulthood. In this paper, we aim to delve into this 
+by developing a mathematical model with the capabilities of determining what the best city 
+objectively is for high school students, taking into account several different factors: safety, 
+economy, education, and transportation. Specifically, we look at 20 cities:
+
+
+Objective 1: Establish the most significant factors that go into the quality of life for a 
+high schooler, as well as subcriterias that fall under the umbrella of each of the larger criterions.
+
+Objective 2: Select a diverse set of 20 cities from across the world to evaluate and 
+compare across these different factors.
+
+
+Objective 3: Determine the relative importance of the above factors, taking into account 
+quantitative data as well as the preferences and opinions of the population.
+
+
+Objective 4: Rank how well the 20 cities perform in relation to these factors and 
+communicate our findings in a brief news article.
+
+
+Objective 5: Identify strengths and weaknesses of our model as well as potential areas 
+for future expansion.
+
+
+\section{Assumptions and Justifications}\label{tocentry:3-0}
+
+\par\noindent\textbf{Assumption 1:} The most important subcriteria to consider are the ones that have the most 
+variety between cities. 
+\par\noindent\textbf{Justification:} The subcriteria with the most variety between cities are the ones that allow us to 
+truly differentiate between cities. Subcriteria with less variety are less likely to provide 
+discriminatory data that we can use to develop substantial rankings. 
+\medskip
+\par\noindent\textbf{Assumption 2:} The factors that are important to the general urban population will be important 
+in similar percentages to high schoolers. 
+\par\noindent\textbf{Justification:} Because most high school students live with their parents, we assume that 
+residential factors important to families are reasonable proxies for factors important to high 
+school students. 
+\medskip
+\par\noindent\textbf{Assumption 3:} With regards to transportation costs, we deemed one family to be made up of two 
+adults and two kids. 
+\par\noindent\textbf{Justification:} According to the US Census Bureau, 41\% of completed families, which are 
+families that are most likely done having children (in which the mothers are at least 40 years of 
+age) have two adults and two children. 
+\medskip
+\par\noindent\textbf{Assumption 4:} Our selected subcriteria adequately represent the criterion (e.g. total cost of 
+living and employment adequately represent the state of a city's economy) 
+\par\noindent\textbf{Justification:} All of the criteria that we have selected consist of many different subcriteria and 
+therefore it is not feasible to completely represent all of the criteria fully. Thus, we assume that 
+the ones that we have selected provide a reasonable coverage of the main criterion.  
+\medskip
+\par\noindent\textbf{Assumption 5:} The Numbeo Perceived Crime Index is a reasonably accurate and valuable 
+indicator of the crime rates in a city. 
+\par\noindent\textbf{Justification:} Although based on public perception rather than official crime statistics, the index 
+reflects how safe residents feel, which directly influences teenagers' quality of life. 
+\medskip
+\par\noindent\textbf{Assumption 6:} Data collected from different years can be used to compare cities 
+\par\noindent\textbf{Justification:} Although data may not be available for the same year across all cities, we assume 
+that the measured conditions remain relatively stable over short periods, allowing meaningful 
+comparisons.
+
+
+\medskip
+\par\noindent\textbf{Assumption 7:} Regional or national data can reasonably represent conditions within a city when 
+city-specific data is unavailable. 
+\par\noindent\textbf{Justification:} We assume that broader geographic trends generally reflect conditions within their 
+major cities, making these datasets reasonable approximations. 
+\medskip
+\par\noindent\textbf{Assumption 8:} The importance of our four main criteria remains consistent across all cities. 
+\par\noindent\textbf{Justification:} Although teenagers in different cities may have different priorities, we assume that 
+safety, economy, education, and transportation contribute similarly to their quality of life 
+regardless of location. 
+ 
+ 
+\section{Part 1: Elements of Our Model}\label{tocentry:4-0}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth,keepaspectratio]{figure4.1.png}
+\caption*{\textbf{Figure 4.1:} Hierarchical Framework, illustrating the application of the Analytic Hierarchy Process (AHP) to determine weights of four criteria and Entropy-Weighted TOPSIS to calculate scores for their respective criteria.}
+\end{figure}
+
+In this section, we describe the cities we have chosen to evaluate, the measures we chose 
+to compare them by, and how we prepared those measures for our model.
+
+
+\subsection{Candidate City Identification and Screening}\label{tocentry:4-1}
+
+There were 24 unique cities across successive versions of our dataset. We retained 20 
+unique cities in our final comparison, seeking geographic variety while also prioritizing 
+consistent standards of data on the subcriteria we chose. Montevideo, Perth, Dublin, and San 
+Francisco were removed because they lacked sufficient consistent data for the selected 
+subcriteria.
+
+
+Where a city-specific figure was unavailable, we used a regional or national figure as a 
+proxy. These substitutions let us compare the selected cities, but they also limit our data's 
+accuracy.
+
+
+\subsection{Main Criteria and Subcriteria}\label{tocentry:4-2}
+
+We grouped a total of ten subcriteria under four main criteria: Safety, Economy, Education, and 
+Transportation.
+
+
+\par\medskip\noindent\textbf{\large Safety}\par\vspace{2pt}\hrule\vspace{5pt}
+
+
+\par\noindent\textbf{a. Numbeo Perceived Crime Index:} A crowdsourced measure of how respondents perceive
+
+
+crime in a city. Lower values are preferable. [1]
+
+
+\par\noindent\textbf{b. Police Personnel-to-Population Ratio:} Recorded number of police personnel divided by
+
+
+city population. We treat a higher ratio as preferable. The cited personnel measures vary in 
+geographic scope. [11, 13, 16, 20, 21, 24, 27, 34, 36, 38, 41, 43, 46, 48, 52, 54]
+
+
+\par\noindent\textbf{c. Firefighter Personnel-to-Population Ratio:} Recorded number of firefighters divided by
+
+
+city population. Higher values are preferable as a measure of potential service availability. 
+[10, 12, 17, 19, 23, 25, 28, 30, 33, 35, 37, 42, 44, 50, 53, 56]
+
+
+\par\noindent\textbf{d. Medical Personnel-to-Population Ratio:} Recorded physician or medical-personnel rate
+
+
+used as an indicator of healthcare availability; higher values are preferable. Some entries 
+are broader geographic proxies rather than city staffing counts. [9, 14, 18, 22, 26, 29, 45, 
+51, 59]
+
+
+\par\medskip\noindent\textbf{\large Economy}\par\vspace{2pt}\hrule\vspace{5pt}
+
+
+\par\noindent\textbf{a. Income-to-Cost-of-Living Ratio:} Average monthly income of two parents divided by an
+
+
+estimated monthly budget for a family of four. The budget combines rent, groceries, 
+transportation, electricity, and available out-of-pocket healthcare costs. A higher ratio is 
+preferred; it means that the specified household income covers more of this estimated 
+budget. Price and healthcare sources include Numbeo, Wise, the World Bank, and Our 
+World in Data. [1-4, 60]
+
+
+\par\noindent\textbf{b. Unemployment Rate:} The recorded rate of unemployment; lower values are preferred. We
+
+
+use broader-area figures where city rates were unavailable. [57, 58, 60]
+
+
+\par\medskip\noindent\textbf{\large Education}\par\vspace{2pt}\hrule\vspace{5pt}
+
+
+\par\noindent\textbf{a. High-School Graduation Rate:} The recorded graduation or equivalent upper-secondary
+
+
+completion measure; higher values are preferable. Because school systems may define 
+completion differently, we treat these rates as approximate comparisons. [60]
+
+
+\par\noindent\textbf{b. Youth Unemployment Rate (ages 15-24):} The recorded unemployment rate for young
+
+
+people aged 15-24 seeking work; lower values are preferable. We use this rate as an 
+imperfect indicator of opportunities after school. [60]
+
+
+\par\medskip\noindent\textbf{\large Transportation}\par\vspace{2pt}\hrule\vspace{5pt}
+
+
+\par\noindent\textbf{a. Student Fare Policy:} 0 indicates students pay the full public-transport fare and 1 indicates
+
+
+discounted or free fare for high school students. All 20 cities take a value of 1. [8, 60]
+
+
+\par\noindent\textbf{b. Public-Transport Coverage:} The recorded proportion of residents within walking
+
+
+distance of public transport, 500 m from a bus or other lower-capacity stop, or 1 km from a 
+rail or other higher-capacity stop. Higher values are preferable. These distances follow the 
+general approach of UN SDG indicator 11.2.1. [5-7, 60]
+
+
+\par\vspace{0.85\baselineskip}\noindent We also considered entertainment, but did not include it in the numerical model. The activities teenagers enjoy differ from person to person, and we could not define a consistent cross-city measure. We also considered climate, but chose not to include it. This is because it is too dependent on personal preference and changes from time to time.\par\vspace{-0.85\baselineskip}
+
+
+\vspace{7pt}\par
+\subsection{Data Collection and Indicator Selection}\label{tocentry:4-3}
+
+We assembled the ten recorded subcriteria for the 20 retained cities into a city-by-subcriterion 
+dataset.
+
+
+For affordability, we calculated finances for a two-adult, two-child household. We summed the 
+monthly costs of rent, groceries, transportation for the adults and children, electricity, and out-of-
+pocket healthcare bills, then divided the average monthly income of two parents by that total. 
+Rent and children's transportation are included.
+
+
+For safety, we kept the distinction between locally measured counts and broader-area substitutes. 
+Bern's medical ratio is 0.0045, representing 4.5 practicing doctors per 1,000 residents in 
+Switzerland, not an observed Bern city physician rate. We chose this Swiss-wide proxy because 
+a consistent Bern-specific measure was unavailable. [59] Reykjavik's recorded 0.0045 is likewise 
+an Iceland-wide practicing-doctor proxy, not a Reykjavik-specific count.
+
+
+Other differences in definition and geography remain. For example, due to unavailability of data, 
+Bern's police ratio uses 2,800 / 1,076,127, while its firefighter ratio uses 360 / 140,000. The 
+different population bases mean that even these two entries should not be described as ratios 
+calculated for the same city boundary. Youth unemployment and graduation figures may also 
+reflect regional or national definitions.
+
+
+
+\vspace{-2pt}
+\par\medskip
+\noindent Our data is as follows:
+\begingroup
+\setlength{\tabcolsep}{0.75pt}
+\renewcommand{\arraystretch}{1.23}
+\fontsize{7.7}{10.0}\selectfont
+\setlength{\LTleft}{-0.53in}
+\setlength{\LTright}{-0.53in}
+\rowcolors{2}{black!3}{white}
+\begin{longtable}{|>{\raggedright\arraybackslash}p{1.095in}|>{\centering\arraybackslash}p{0.548in}|>{\centering\arraybackslash}p{0.853in}|>{\centering\arraybackslash}p{0.790in}|>{\centering\arraybackslash}p{0.739in}|>{\centering\arraybackslash}p{0.573in}|>{\centering\arraybackslash}p{0.650in}|>{\centering\arraybackslash}p{0.382in}|>{\centering\arraybackslash}p{0.701in}|>{\centering\arraybackslash}p{0.586in}|>{\centering\arraybackslash}p{0.662in}|}
+\caption*{\textbf{Table 4.3:} Collected Subcriterion Data for the 20 Candidate Cities}\\
+\hline
+\cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries City}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Perceived\\Crime\\Index}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Police per\\Resident\\Ratio}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Firefighters\\per Resident\\Ratio}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Medical\\Personnel\\per Resident}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Income /\\Cost of\\Living}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Overall\\Unemployment\\Rate}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Student\\Fare\\Policy}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Public\\Transport\\Coverage}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries High School\\Graduation\\Rate}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Youth\\Unemployment\\(15--24)}} \\ \hline
+\endfirsthead
+\multicolumn{11}{c}{\textbf{Table 4.3 (continued)}}\\
+\hline
+\cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries City}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Perceived\\Crime\\Index}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Police per\\Resident\\Ratio}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Firefighters\\per Resident\\Ratio}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Medical\\Personnel\\per Resident}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Income /\\Cost of\\Living}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Overall\\Unemployment\\Rate}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Student\\Fare\\Policy}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Public\\Transport\\Coverage}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries High School\\Graduation\\Rate}} & \cellcolor{black!12}{\fontsize{6.5}{7.4}\selectfont\shortstack{\bfseries Youth\\Unemployment\\(15--24)}} \\ \hline
+\endhead
+\hline\multicolumn{11}{r}{\textit{Continued on next page}}\\
+\endfoot
+\hline
+\endlastfoot
+Abu Dhabi & 11.4 & 3070.175439 & 0.000607 & 0.0029 & 2.22 & 0.02 & 1 & 0.273 & 0.97 & 0.167 \\ \hline
+Bern & 27.4 & 0.002602 & 0.002571 & 0.0045 & 2.01 & 0.03 & 1 & 0.915 & 0.902 & 0.026 \\ \hline
+Seoul & 25.4 & 1245 & 292.677 & 0.0027 & 1.72 & 0.025 & 1 & 0.706 & 0.95 & 0.068 \\ \hline
+Munich & 21.7 & 368.664 & 142.857 & 691.244 & 1.07 & 0.05 & 1 & 0.936 & 0.942 & 0.075 \\ \hline
+Ottawa & 30.9 & 73.172 & 48.544 & 0.0027 & 3.32 & 0.073 & 1 & 0.85 & 0.9 & 0.15 \\ \hline
+Hong Kong & 21.8 & 1517.202 & 526.422 & 775.459 & 0.91 & 0.039 & 1 & 0.985 & 0.99 & 0.0903 \\ \hline
+Reykjavik & 24.6 & 31.951 & 8.13 & 0.0045 & 2.30 & 0.046 & 1 & 0.914 & 0.64 & 0.173 \\ \hline
+Singapore & 22.3 & 0.00161 & 0.000464 & 0.002915 & 1.29 & 0.02 & 1 & 0.99 & 0.987 & 0.066 \\ \hline
+Tokyo & 24.1 & 0.003223 & 781.701 & 0.00272 & 1.81 & 0.024 & 1 & 0.74 & 0.96 & 0.035 \\ \hline
+Vancouver & 42.8 & 33.925 & 22.43 & 0.0027 & 1.42 & 0.065 & 1 & 0.927 & 0.91 & 0.195 \\ \hline
+New York & 50.8 & 689.469 & 222.323 & 0.0027 & 0.73 & 0.043 & 1 & 0.698 & 0.812 & 0.119 \\ \hline
+London & 55.3 & 619.982 & 92.152 & 0.0034 & 1.70 & 0.048 & 1 & 0.948 & 0.705 & 0.246 \\ \hline
+Paris & 57.9 & 498.204 & 150.794 & 0.00237 & 1.07 & 0.066 & 1 & 0.977 & 0.94 & 0.13 \\ \hline
+Seattle & 55.3 & 17.722 & 17.74 & 0.0027 & 2.74 & 0.049 & 1 & 0.89 & 0.875 & 0.093 \\ \hline
+Taipei & 16.6 & 464.94 & 153.614 & 0.00503 & 1.14 & 0.0345 & 1 & 0.965 & 0.9881 & 0.1165 \\ \hline
+Melbourne CBD & 44.3 & 7.946 & 0.002245 & 0.0042 & 1.56 & 0.04 & 1 & 0.889 & 0.81 & 0.118 \\ \hline
+Boston & 40.3 & 53.077 & 36.402 & 0.00485 & 1.62 & 0.041 & 1 & 0.732 & 0.813 & 0.198 \\ \hline
+San Jose & 48 & 20.792 & 13.542 & 0.000792 & 1.61 & 0.042 & 1 & 0.895 & 0.81 & 0.233 \\ \hline
+Zurich & 24.1 & 91.286 & 12.448 & 0.0106 & 1.67 & 0.029 & 1 & 0.952 & 0.901 & 0.0904 \\ \hline
+Shanghai & 26.5 & 1886.792 & 415.094 & 0.00392 & 0.77 & 0.052 & 1 & 0.553 & 0.99 & 0.18 \\
+\end{longtable}
+\endgroup
+
+\subsection{Data Preprocessing}\label{tocentry:4-4}
+
+Before scoring, we compiled a numeric value for every subcriterion for each of the 20 
+cities. Personnel ratios and rates are represented as decimals. The normalizing steps for Entropy 
+Weighting and TOPSIS are explained within Section 5.
+
+
+The Student-Fare metric was kept to demonstrate a policy that was considered, but every 
+one of the 20 cities has a recorded value of 1. Since there is no differentiation among the values, 
+its calculated Entropy Weight is 0, so recorded coverage drives the Transportation TOPSIS.
+
+
+We also revised how we used medical personnel data. An earlier Reykjavik figure 
+counted staff at an Icelandic hospital rather than practicing doctors, so we replaced it with a 
+national practicing doctor rate. Similarly, we replaced Bern's earlier medical ratio of 0.0178 with 
+the Swiss-wide 0.0045 proxy. We corrected other personnel to population mismatches in Bern's 
+firefighter and police ratios. Though we must recognize its limitations, these changes helped 
+improve the model nonetheless.
+
+
+Because some subcriteria are based on regional or national proxies and differ in year and 
+definition, the resulting scores should be interpreted as comparative estimates rather than exact 
+measurements of city conditions.
+
+
+\section{Part 2: Hierarchical City Evaluation Model}\label{tocentry:5-0}
+\subsection{Variables}\label{tocentry:5-1}
+\renewcommand{\thetable}{5.1}
+\begin{longtable}{|p{0.22\linewidth}|p{0.70\linewidth}|}
+\caption{Table of variables}\\
+\hline
+\textbf{Variable} & \textbf{Definition} \\ \hline
+\endfirsthead
+\hline
+\textbf{Variable} & \textbf{Definition} \\ \hline
+\endhead
+$N$ & Number of candidate cities \\ \hline
+$M$ & Number of main criteria \\ \hline
+$i$ & City index \\ \hline
+$j$ & Main criterion index \\ \hline
+$m_j$ & Number of subcriteria under criterion $j$ \\ \hline
+$x_{ijk}$ & Raw data for city $i$, criterion $j$, subcriterion $k$ \\ \hline
+$z_{ijk}$ & Min--max normalized value for entropy weighting \\ \hline
+$p_{ijk}$ & Proportional contribution of city $i$ \\ \hline
+$e_{jk}$ & Entropy of subcriterion $k$ under criterion $j$ \\ \hline
+$d_{jk}$ & Information divergence \\ \hline
+$w_{jk}$ & Normalized entropy weight \\ \hline
+$r_{ijk}$ & Vector-normalized observation \\ \hline
+$v_{ijk}$ & Entropy-weighted normalized observation \\ \hline
+$C_{ij}$ & TOPSIS score of city $i$ under criterion $j$ \\ \hline
+$W_j$ & AHP weight for criterion $j$ \\ \hline
+$S_i$ & Final score for city $i$ \\ \hline
+\end{longtable}
+
+\subsection{Model Overview}\label{tocentry:5-2}
+We use a hierarchical multi-criteria decision model to determine the most suitable city for high schoolers to live in. Our model considers four main criteria: safety, economy, transportation, and education.
+
+First, we use entropy weighting to determine the relative importance of the subcriteria within each main criterion. Next, we apply entropy-weighted TOPSIS to measure each city's performance under each main criterion by comparing it with positive-ideal and negative-ideal solutions. We then use the Analytic Hierarchy Process (AHP) to determine the relative importance of the four main criteria through pairwise comparisons. Finally, we calculate a weighted sum of the criterion-level TOPSIS scores to rank the 20 candidate cities.
+
+\subsection{Entropy-Based Subcriteria Weighting}\label{tocentry:5-3}
+Entropy weighting assigns greater weight to subcriteria that provide more discriminatory information across the candidate cities.
+
+First, we arrange the collected data into a decision matrix, with cities as rows and subcriteria as columns. For benefit subcriteria, where higher values are preferable, we use min--max normalization:
+\[
+z_{ijk}=\frac{x_{ijk}-\min_i(x_{ijk})}{\max_i(x_{ijk})-\min_i(x_{ijk})}.
+\]
+For cost subcriteria, where lower values are preferable, we use:
+\[
+z_{ijk}=\frac{\max_i(x_{ijk})-x_{ijk}}{\max_i(x_{ijk})-\min_i(x_{ijk})}.
+\]
+We then calculate each city's proportional contribution to the normalized values of a subcriterion:
+\[
+p_{ijk}=\frac{z_{ijk}}{\sum_{i=1}^{N}z_{ijk}}.
+\]
+These proportions sum to 1 across the cities for each subcriterion. We use them to calculate information entropy:
+\[
+e_{jk}=-\frac{1}{\ln(N)}\sum_{i=1}^{N}p_{ijk}\ln(p_{ijk}).
+\]
+Here, $e_{jk}$ denotes the entropy of subcriterion $k$ under main criterion $j$. Subcriteria with greater variation tend to have lower entropy. We therefore calculate information divergence as:
+\[
+d_{jk}=1-e_{jk}.
+\]
+Finally, we normalize the divergence values to obtain the entropy weights within each main criterion:
+\[
+w_{jk}=\frac{d_{jk}}{\sum_{k=1}^{m_j}d_{jk}}.
+\]
+
+\subsection{Entropy-Weighted TOPSIS Evaluation}\label{tocentry:5-4}
+After calculating the entropy weights, we use TOPSIS to evaluate each city under each main criterion. Higher closeness scores indicate stronger performance.
+
+\par\vspace{0.14in}\noindent\textbf{Step 1: Establish the Decision Matrix.}
+For each main criterion $j$, we construct a decision matrix $X^{(j)}$ containing the observed values of its subcriteria across all candidate cities:
+\[
+X^{(j)}=\begin{bmatrix}
+x_{1j1}&x_{1j2}&\cdots&x_{1jm_j}\\
+x_{2j1}&x_{2j2}&\cdots&x_{2jm_j}\\
+\vdots&\vdots&\ddots&\vdots\\
+x_{Nj1}&x_{Nj2}&\cdots&x_{Njm_j}
+\end{bmatrix}.
+\]
+\par\vspace{0.14in}\noindent\textbf{Step 2: Calculate the Normalized Decision Matrix.}
+Because subcriteria are measured in different units, we normalize each column using vector normalization:
+\[
+r_{ijk}=\frac{x_{ijk}}{\sqrt{\sum_{i=1}^{N}x_{ijk}^{2}}}.
+\]
+Here, $r_{ijk}$ is the normalized value of subcriterion $k$ for city $i$ under criterion $j$.
+
+\par\vspace{0.14in}\noindent\textbf{Step 3: Incorporate Entropy Weights.}
+We multiply each normalized observation by its corresponding entropy weight:
+\[
+v_{ijk}=w_{jk}r_{ijk},\qquad \sum_{k=1}^{m_j}w_{jk}=1.
+\]
+The weighted normalized values form the matrix $V^{(j)}$. Weighting the observations allows subcriteria with greater discriminatory information to have a larger influence on the distance calculations.
+
+\par\vspace{0.14in}\noindent\textbf{Step 4: Calculate the Positive-Ideal and Negative-Ideal Solutions.}
+Using the weighted normalized matrix, we identify the positive-ideal solution $A_j^+$ and negative-ideal solution $A_j^-$:
+\[
+\begin{aligned}
+A_j^+&=(v_{j1}^+,v_{j2}^+,\ldots,v_{jm_j}^+),\\
+A_j^-&=(v_{j1}^-,v_{j2}^-,\ldots,v_{jm_j}^-).
+\end{aligned}
+\]
+For benefit subcriteria, where higher values are preferable:
+\[
+v_{jk}^+=\max_i(v_{ijk}),\qquad v_{jk}^-=\min_i(v_{ijk}).
+\]
+For cost subcriteria, where lower values are preferable:
+\[
+v_{jk}^+=\min_i(v_{ijk}),\qquad v_{jk}^-=\max_i(v_{ijk}).
+\]
+The ideal values are selected separately for each subcriterion across all cities.
+
+\par\vspace{0.14in}\noindent\textbf{Step 5: Calculate the Separation Measures.}
+We calculate each city's Euclidean distance from the positive-ideal and negative-ideal solutions:
+\[
+\begin{aligned}
+D_{ij}^+&=\sqrt{\sum_{k=1}^{m_j}(v_{ijk}-v_{jk}^+)^2},\\
+D_{ij}^-&=\sqrt{\sum_{k=1}^{m_j}(v_{ijk}-v_{jk}^-)^2}.
+\end{aligned}
+\]
+Because $v_{ijk}=w_{jk}r_{ijk}$, these distances incorporate the entropy weights of the subcriteria.
+
+\par\vspace{0.14in}\noindent\textbf{Step 6: Calculate the Relative Closeness Score.}
+We combine the separation measures to calculate each city's relative closeness to the positive-ideal solution:
+\[
+C_{ij}=\frac{D_{ij}^-}{D_{ij}^++D_{ij}^-}.
+\]
+Here, $C_{ij}$ is the TOPSIS score of city $i$ under main criterion $j$.
+
+\subsection{AHP Evaluation for Main Criteria}\label{tocentry:5-5}
+After obtaining TOPSIS scores for each city under every main criterion, we use the Analytic Hierarchy Process (AHP) to determine the relative importance of the four main criteria through pairwise comparisons.
+
+To express these judgments consistently, we use the Saaty importance scale shown in Table 5.5.1. A larger value means the row criterion is judged more important than the column criterion; the reverse comparison takes its reciprocal.
+
+\begin{wraptable}{r}{0.48\textwidth}
+\vspace{-0.35em}
+\centering
+\caption*{\textbf{Table 5.5.1:} Pairwise Comparison Importance Scale}
+\vspace{0.1em}
+\begingroup
+\renewcommand{\arraystretch}{1.12}
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+\begin{tabular}{>{\centering\arraybackslash}p{0.12\linewidth} p{0.73\linewidth}}
+\toprule
+\textbf{Value} & \textbf{Interpretation in our city model} \\
+\midrule
+\textbf{1} & Both criteria are equally important \\
+\textbf{3} & One criterion is somewhat more important \\
+\textbf{5} & One criterion is clearly more important \\
+\textbf{7} & One criterion is much more important \\
+\textbf{9} & One criterion is overwhelmingly more important \\
+\bottomrule
+\end{tabular}
+\endgroup
+\vspace{0.1em}
+\par\smallskip\noindent\scriptsize\emph{Intermediate judgments use 2, 4, 6, or 8; reverse comparisons use reciprocals (e.g., $1/3$).}\normalsize
+\vspace{-1.45em}
+\end{wraptable}
+
+We normalize the pairwise comparison matrix by dividing each entry by the sum of its column:
+\[
+b_{jk}=\frac{a_{jk}}{\sum_{i=1}^{M}a_{ik}}.
+\]
+We then estimate the relative weights of the main criteria by averaging the normalized values in each row:
+\[
+W_j=\frac{1}{M}\sum_{k=1}^{M}b_{jk}.
+\]
+Finally, we calculate the Consistency Ratio (CR) to evaluate the logical consistency of our pairwise comparisons:
+\[
+CR=\frac{CI}{RI}.
+\]
+A consistency ratio below 0.10 indicates acceptable consistency.
+
+\subsection{City-Scoring}\label{tocentry:5-6}
+We calculate each city's final score by multiplying its TOPSIS scores by the corresponding AHP weights and summing the results:
+\[
+S_i=\sum_{j=1}^{M}W_jC_{ij}.
+\]
+Cities are ranked in descending order of $S_i$, with the highest score indicating the most suitable city for high schoolers.
+
+\section{Part 3: Application of Our Model}\label{tocentry:6-0}
+
+\subsection{Calculation of Entropy Weights}\label{tocentry:6-1}
+
+We first applied our entropy-weighting procedure to the collected data for all 20 cities. 
+For each main criterion, we calculated the entropy weights of its respective subcriteria. The 
+resulting weights are presented in Table 6.1.
+
+
+\begin{table}[H]
+\centering
+\renewcommand{\thetable}{6.1}
+\caption{Entropy weights for each subcriterion}
+\normalsize
+\renewcommand{\arraystretch}{1.13}
+\setlength{\tabcolsep}{9pt}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Main criterion} & \textbf{Subcriterion} & \textbf{Entropy weight} \\
+\midrule
+Safety & Numbeo Perceived Crime Index & 0.170728 \\
+Safety & Police-to-Civilian Ratio & 0.323944 \\
+Safety & Firefighter-to-Civilian Ratio & 0.320364 \\
+Safety & Medical-to-Civilian Ratio & 0.184964 \\
+Economy & Income-to-Cost-of-Living Ratio & 0.652610 \\
+Economy & Unemployment Rate & 0.347390 \\
+Transportation & Children's Transit Fare & 0.000000 \\
+Transportation & Transport Coverage & 1.000000 \\
+Education & High School Graduation Rate & 0.377176 \\
+Education & Youth Unemployment Rate (15--24) & 0.622824 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{TOPSIS Evaluation}\label{tocentry:6-2}
+
+With our entropy weights established, we applied our weighted TOPSIS model to 
+evaluate the 20 cities under each main criterion. The resulting scores are displayed in Table 6.2.
+
+
+\begingroup
+\setlength{\LTleft}{\fill}
+\setlength{\LTright}{\fill}
+\renewcommand{\thetable}{6.2}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}p{0.29\linewidth}rrrr@{}}
+\caption{Entropy-weighted TOPSIS scores across the four criteria}\\
+\toprule
+\textbf{City} & \textbf{Safety} & \textbf{Economy} & \textbf{Transportation} & \textbf{Education} \\
+\midrule
+Bern, Switzerland & 0.396500 & 0.560000 & 0.895400 & 0.878200 \\
+Zurich, Switzerland & 0.389200 & 0.470500 & 0.947000 & 0.717300 \\
+Paris, France & 0.664300 & 0.131500 & 0.981900 & 0.606200 \\
+Munich, Germany & 0.465500 & 0.224200 & 0.924700 & 0.797600 \\
+Tokyo, Japan & 0.285400 & 0.524700 & 0.651300 & 0.943700 \\
+Seattle, USA & 0.143700 & 0.688700 & 0.860500 & 0.688900 \\
+Melbourne CBD, Australia & 0.418300 & 0.394200 & 0.859100 & 0.555600 \\
+Abu Dhabi, UAE & 0.493000 & 0.648600 & 0.000000 & 0.512400 \\
+Reykjavik, Iceland & 0.371300 & 0.584300 & 0.894000 & 0.269000 \\
+Ottawa, Canada & 0.253900 & 0.652600 & 0.804700 & 0.517300 \\
+Seoul, South Korea & 0.247200 & 0.498200 & 0.603900 & 0.827000 \\
+Singapore, Singapore & 0.226900 & 0.423000 & 1.000000 & 0.848000 \\
+Hong Kong, SAR of China & 0.332300 & 0.268400 & 0.993000 & 0.761200 \\
+Taipei, Taiwan & 0.320300 & 0.328500 & 0.965100 & 0.671800 \\
+Boston, USA & 0.341800 & 0.405600 & 0.640200 & 0.306100 \\
+New York, USA & 0.219600 & 0.226900 & 0.592700 & 0.553900 \\
+Vancouver, Canada & 0.208500 & 0.244100 & 0.912100 & 0.400500 \\
+London, UK & 0.157800 & 0.396700 & 0.941400 & 0.091600 \\
+San Jose, USA & 0.075200 & 0.398300 & 0.867500 & 0.232400 \\
+Shanghai, China & 0.223000 & 0.169600 & 0.390500 & 0.491200 \\
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection{AHP Weight Calculation and Consistency Verification}\label{tocentry:6-3}
+
+We determined the relative importance of our four main criteria with Saaty's 1-9 
+importance scale and constructed the pairwise comparison matrix shown below.
+
+
+\[ A=\begin{bmatrix}1&3&5&2\\\frac13&1&3&\frac12\\\frac15&\frac13&1&\frac14\\\frac12&2&4&1\end{bmatrix}\]
+
+We then performed a consistency check and obtained a Consistency Ratio (CR) of 0.0189. Since CR < 0.10, the consistency of our pairwise comparison matrix is acceptable. The corresponding AHP weights were then calculated and are presented in Figure 6.3.
+
+
+\noindent\begin{minipage}[c]{0.61\textwidth}
+\setlength{\parindent}{1.35em}
+Safety received the highest weight (0.4709), followed by Economy (0.2840), Education (0.0736), and Transportation (0.1715). This makes intuitive sense, as especially for adolescents, it is important to grow up in a safe environment. Meanwhile, education and transportation are ranked as the two lowest, because they have less impact on a teenagers' day-to-day well being.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\textwidth}
+\centering
+\includegraphics[width=\linewidth]{image6.3.png}
+\par\vspace{2pt}{\centering\footnotesize \textbf{Figure 6.3:} Comparison of AHP-Calculated Weights for the Four Criteria\par}
+\end{minipage}
+\par\vspace{0.6em}
+
+\subsection{Final City Rankings and Interpretation of Results}\label{tocentry:6-4}
+
+Finally, we combined the TOPSIS scores with the AHP weights to obtain an overall score 
+for each candidate city. The resulting rankings are presented below.
+
+
+\begin{table}[H]
+\centering
+\renewcommand{\thetable}{6.4}
+\caption{Final city rankings and scores}
+\normalsize
+\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{9pt}
+\begin{tabular}{@{}llr@{}}
+\toprule
+\textbf{Rank} & \textbf{City} & \textbf{Final score} \\
+\midrule
+1 & Bern, Switzerland & 0.5623 \\
+2 & Paris, France & 0.5265 \\
+3 & Zurich, Switzerland & 0.5096 \\
+4 & Abu Dhabi, UAE & 0.5043 \\
+5 & Tokyo, Japan & 0.4932 \\
+6 & Munich, Germany & 0.4877 \\
+7 & Melbourne CBD, Australia & 0.4675 \\
+8 & Ottawa, Canada & 0.4529 \\
+9 & Reykjavik, Iceland & 0.4527 \\
+10 & Singapore, Singapore & 0.4460 \\
+11 & Seattle, USA & 0.4447 \\
+12 & Seoul, South Korea & 0.4442 \\
+13 & Hong Kong, SAR of China & 0.4364 \\
+14 & Taipei, Taiwan & 0.4304 \\
+15 & Boston, USA & 0.3758 \\
+16 & New York, USA & 0.3065 \\
+17 & Vancouver, Canada & 0.3034 \\
+18 & London, UK & 0.2720 \\
+19 & Shanghai, China & 0.2662 \\
+20 & San Jose, USA & 0.2522 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+We have identified Bern, Switzerland, as the most suitable city, with a final score of 
+0.5623, followed by Paris (0.5265), Zurich (0.5096), Abu Dhabi (0.5043), and Tokyo (0.4932). 
+While no city can realistically excel in every aspect of urban life, Bern demonstrated the 
+strongest overall balance of safety, economic conditions, education, and transportation. Its 
+particularly strong performance in Education (0.8782) and Transportation (0.8954), combined 
+with competitive scores in Safety (0.3965) and Economy (0.5600), suggests that it provides a 
+well-rounded environment for residents rather than excelling in only one dimension.
+
+
+Interestingly, despite their global influence and extensive infrastructure, New York placed 
+16th (0.3065), London 18th (0.2720), and Shanghai 19th (0.2662). This demonstrates how the 
+prestige of a city's global reputation alone does not make daily life easier for its residents. After 
+all, towering skyscrapers and bustling financial districts mean little if residents struggle with 
+affordability, access to essential services, or educational opportunities. Ultimately, our model 
+provides a quantitative and transparent framework that looks beyond prestige to evaluate what 
+truly matters: how well a city supports the people, particularly the high schoolers, who live there.
+
+
+\clearpage
+\section{Strengths and Weaknesses}\label{tocentry:7-0}
+
+
+\subsection{Strengths}\label{tocentry:7-1}
+In this section, we consider some of the strengths of our model:
+\begin{enumerate}[leftmargin=*,itemsep=0pt,topsep=3pt,parsep=0pt]
+\item Our model balances quantitative data with human judgement. Through applying a
+modified version of TOPSIS using entropy weights directly on the data, we successfully
+accounted for differences across cities. We also used AHP to incorporate the relative 
+importance of safety, transportation, economy, and education.
+\item Our model reduces the effect of arbitrary weighing. Instead of assigning the same
+weighing to each subcriteria, we use entropy weighing to determine which subcriteria we 
+can truly use to distinguish between cities.
+\item Our model normalizes data via TOPSIS to compare different sets of data, allowing
+variables with different units to be incorporated into one model.
+\item Our model considers high performance as well as trade-offs, making it necessary for a
+city to perform well in all the criterions to be ranked highly
+\item Our model is easily expandable. We can easily add more cities, factors, or updated data
+without having to make significant changes.
+\end{enumerate}
+\subsection{Weaknesses}\label{tocentry:7-2}
+In this section, we consider some of the weaknesses of the model:
+\begin{enumerate}[leftmargin=*,itemsep=0pt,topsep=3pt,parsep=0pt]
+\item Our model equates variance in the data with importance through entropy weighing. It is
+possible that a subcriteria that should be weighted high is not taken into due consideration 
+if there is low variation in the data for that subcriteria between the cities.
+\item Our model relies on subjective judgments when determining the importance of main
+criteria. Although AHP provides a structured method for assigning weights, the pairwise 
+comparisons are still based on our own judgments.
+\item Our model is sensitive to the cities included in the comparison. Since TOPSIS determines
+the ideal and negative-ideal solutions using the best and worst values among the cities 
+being evaluated, adding or removing a city may change the scores and rankings of the 
+remaining cities.
+\item Our model depends on the accuracy and availability of the collected data. Some
+indicators may be outdated, incomplete, measured differently across cities, or predicted 
+via larger-area proxies. Although we preprocess the data to improve consistency, these 
+differences may still affect the accuracy of our rankings.
+\item Since our evaluation relies on data collected from a particular period, our model does not
+fully account for changes over time.
+\end{enumerate}
+\section{Part IV: Model Expansion and Robustness Analysis}\label{tocentry:8-0}
+
+\subsection{Monte Carlo Simulation of Weight Uncertainty}\label{tocentry:8-1}
+
+To test the validity of our model, we used a Monte Carlo simulation in order to determine
+how our results would change if we changed the weights that we used in AHP. A Monte Carlo
+simulation is a way of testing large amounts of possibilities of weights to see what cities
+consistently rank among the highest. In this case, we differed the AHP weights while keeping the
+underlying data and TOPSIS scores consistent.
+The below charts depict how our scores changed with the fluctuation of the AHP weights.
+The mean simulated score is the average of all the scores that were generated from AHP weights
+within either 5\%, 10\%, or 15\% variation, for each of the three charts.  If increasingly large
+perturbations only cause small changes to our scores and rankings, that demonstrates that our
+model is not overly dependent on the AHP weighting.
+
+\clearpage
+\begingroup
+\captionsetup[table]{font=footnotesize,labelfont=bf,skip=1pt}
+\begin{table}[H]\vspace{-4pt}
+\centering
+\renewcommand{\thetable}{8.1.1}
+\caption{Monte Carlo sensitivity analysis at 5\% AHP-weight variation}
+\fontsize{7.2}{7.6}\selectfont
+\renewcommand{\arraystretch}{1.18}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}r p{0.27\linewidth} r r r r @{}}
+\toprule
+\textbf{Rank} & \textbf{City} & \textbf{Original score} & \textbf{Mean simulated} & \textbf{Std. dev.} & \textbf{Mean deviation} \\
+\midrule
+1 & Bern, Switzerland & 0.5623 & 0.5624 & 0.0028 & 0.0001 \\
+2 & Paris, France & 0.5265 & 0.5263 & 0.0039 & -0.0001 \\
+3 & Zurich, Switzerland & 0.5096 & 0.5097 & 0.0021 & 0.0001 \\
+4 & Abu Dhabi, UAE & 0.5043 & 0.5042 & 0.0016 & -0.0001 \\
+5 & Tokyo, Japan & 0.4932 & 0.4934 & 0.0035 & 0.0002 \\
+6 & Munich, Germany & 0.4877 & 0.4876 & 0.0028 & -0.0001 \\
+7 & Melbourne CBD, Australia & 0.4675 & 0.4675 & 0.0013 & 0.0000 \\
+8 & Ottawa, Canada & 0.4529 & 0.4538 & 0.0026 & 0.0009 \\
+9 & Reykjavik, Iceland & 0.4527 & 0.4521 & 0.0025 & -0.0007 \\
+10 & Singapore, Singapore & 0.4460 & 0.4467 & 0.0039 & 0.0007 \\
+11 & Seattle, USA & 0.4447 & 0.4450 & 0.0037 & 0.0002 \\
+12 & Seoul, South Korea & 0.4442 & 0.4437 & 0.0037 & -0.0005 \\
+13 & Hong Kong, SAR of China & 0.4364 & 0.4364 & 0.0028 & 0.0000 \\
+14 & Taipei, Taiwan & 0.4304 & 0.4305 & 0.0024 & 0.0001 \\
+15 & Boston, USA & 0.3758 & 0.3758 & 0.0008 & -0.0000 \\
+16 & New York, USA & 0.3065 & 0.3066 & 0.0019 & 0.0000 \\
+17 & Vancouver, Canada & 0.3034 & 0.3034 & 0.0020 & 0.0001 \\
+18 & London, UK & 0.2720 & 0.2721 & 0.0024 & 0.0001 \\
+19 & Shanghai, China & 0.2662 & 0.2662 & 0.0015 & -0.0000 \\
+20 & San Jose, USA & 0.2522 & 0.2524 & 0.0029 & 0.0001 \\
+\bottomrule
+\end{tabular}
+\end{table}\vspace{-5pt}
+
+\begin{table}[H]\vspace{-4pt}
+\centering
+\renewcommand{\thetable}{8.1.2}
+\renewcommand{\arraystretch}{1.18}
+\caption{Monte Carlo sensitivity analysis at 10\% AHP-weight variation}
+\fontsize{7.2}{7.6}\selectfont
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}r p{0.27\linewidth} r r r r @{}}
+\toprule
+\textbf{Rank} & \textbf{City} & \textbf{Original score} & \textbf{Mean simulated} & \textbf{Std. dev.} & \textbf{Mean deviation} \\
+\midrule
+1 & Bern, Switzerland & 0.5623 & 0.5623 & 0.0057 & 0.0000 \\
+2 & Paris, France & 0.5265 & 0.5265 & 0.0076 & 0.0000 \\
+3 & Zurich, Switzerland & 0.5096 & 0.5102 & 0.0037 & 0.0005 \\
+4 & Abu Dhabi, UAE & 0.5043 & 0.5039 & 0.0028 & -0.0004 \\
+5 & Tokyo, Japan & 0.4932 & 0.4939 & 0.0061 & 0.0007 \\
+6 & Munich, Germany & 0.4877 & 0.4867 & 0.0055 & -0.0010 \\
+7 & Melbourne CBD, Australia & 0.4675 & 0.4675 & 0.0026 & 0.0000 \\
+8 & Ottawa, Canada & 0.4529 & 0.4548 & 0.0053 & 0.0019 \\
+9 & Reykjavik, Iceland & 0.4527 & 0.4522 & 0.0059 & -0.0006 \\
+10 & Singapore, Singapore & 0.4460 & 0.4471 & 0.0075 & 0.0011 \\
+11 & Seattle, USA & 0.4447 & 0.4447 & 0.0070 & -0.0000 \\
+12 & Seoul, South Korea & 0.4442 & 0.4429 & 0.0068 & -0.0012 \\
+13 & Hong Kong, SAR of China & 0.4364 & 0.4357 & 0.0058 & -0.0007 \\
+14 & Taipei, Taiwan & 0.4304 & 0.4304 & 0.0048 & 0.0000 \\
+15 & Boston, USA & 0.3758 & 0.3758 & 0.0017 & 0.0000 \\
+16 & New York, USA & 0.3065 & 0.3066 & 0.0039 & 0.0001 \\
+17 & Vancouver, Canada & 0.3034 & 0.3034 & 0.0039 & 0.0000 \\
+18 & London, UK & 0.2720 & 0.2727 & 0.0045 & 0.0007 \\
+19 & Shanghai, China & 0.2662 & 0.2656 & 0.0029 & -0.0006 \\
+20 & San Jose, USA & 0.2522 & 0.2524 & 0.0060 & 0.0001 \\
+\bottomrule
+\end{tabular}
+\end{table}\vspace{-5pt}
+
+\begin{table}[H]\vspace{-4pt}
+\centering
+\renewcommand{\thetable}{8.1.3}
+\renewcommand{\arraystretch}{1.18}
+\caption{Monte Carlo sensitivity analysis at 15\% AHP-weight variation}
+\fontsize{7.2}{7.6}\selectfont
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}r p{0.27\linewidth} r r r r @{}}
+\toprule
+\textbf{Rank} & \textbf{City} & \textbf{Original score} & \textbf{Mean simulated} & \textbf{Std. dev.} & \textbf{Mean deviation} \\
+\midrule
+1 & Bern, Switzerland & 0.5623 & 0.5624 & 0.0082 & 0.0001 \\
+2 & Paris, France & 0.5265 & 0.5273 & 0.0106 & 0.0008 \\
+3 & Zurich, Switzerland & 0.5096 & 0.5105 & 0.0046 & 0.0009 \\
+4 & Abu Dhabi, UAE & 0.5043 & 0.5037 & 0.0041 & -0.0006 \\
+5 & Tokyo, Japan & 0.4932 & 0.4946 & 0.0077 & 0.0014 \\
+6 & Munich, Germany & 0.4877 & 0.4853 & 0.0077 & -0.0025 \\
+7 & Melbourne CBD, Australia & 0.4675 & 0.4676 & 0.0039 & 0.0001 \\
+8 & Ottawa, Canada & 0.4529 & 0.4558 & 0.0079 & 0.0029 \\
+9 & Reykjavik, Iceland & 0.4527 & 0.4524 & 0.0090 & -0.0003 \\
+10 & Singapore, Singapore & 0.4460 & 0.4476 & 0.0103 & 0.0016 \\
+11 & Seattle, USA & 0.4447 & 0.4448 & 0.0097 & 0.0000 \\
+12 & Seoul, South Korea & 0.4442 & 0.4423 & 0.0091 & -0.0018 \\
+13 & Hong Kong, SAR of China & 0.4364 & 0.4346 & 0.0081 & -0.0018 \\
+14 & Taipei, Taiwan & 0.4304 & 0.4298 & 0.0073 & -0.0006 \\
+15 & Boston, USA & 0.3758 & 0.3757 & 0.0025 & -0.0001 \\
+16 & New York, USA & 0.3065 & 0.3068 & 0.0055 & 0.0003 \\
+17 & Vancouver, Canada & 0.3034 & 0.3030 & 0.0055 & -0.0003 \\
+18 & London, UK & 0.2720 & 0.2734 & 0.0060 & 0.0014 \\
+19 & Shanghai, China & 0.2662 & 0.2649 & 0.0043 & -0.0013 \\
+20 & San Jose, USA & 0.2522 & 0.2518 & 0.0086 & -0.0004 \\
+\bottomrule
+\end{tabular}
+\end{table}\vspace{-5pt}
+
+\endgroup
+\clearpage
+The graphs below illustrate how variation in the AHP weights affects the simulated city scores. The three sensitivity plots and their comparison are grouped together for easier comparison.
+
+
+\thispagestyle{fancy}\begin{adjustwidth}{-0.45in}{-0.45in}
+\begin{figure}[H]
+\centering
+\vspace*{-4pt}
+\begin{minipage}[t]{0.495\textwidth}\centering
+\includegraphics[width=\linewidth]{image8.1.1.png}
+\par\vspace{3pt}{\small (a) Cities 1--5}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.495\textwidth}\centering
+\includegraphics[width=\linewidth]{image8.1.2.png}
+\par\vspace{3pt}{\small (b) Cities 6--10}
+\end{minipage}
+\par\vspace{8pt}
+\begin{minipage}[t]{0.495\textwidth}\centering
+\includegraphics[width=\linewidth]{image8.1.3.png}
+\par\vspace{3pt}{\small (c) Cities 11--15}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.495\textwidth}\centering
+\includegraphics[width=\linewidth]{image8.1.4.png}
+\par\vspace{3pt}{\small (d) Cities 16--20}
+\end{minipage}
+\renewcommand{\thefigure}{8.1}
+\caption{Monte Carlo sensitivity analysis: city scores under AHP-weight fluctuations, grouped by city rank.}
+\end{figure}
+\end{adjustwidth}
+
+\subsection{Ranking Stability and Robustness}\label{tocentry:8-2}
+
+Our model is consistently stable when it comes to varying the AHP weights and has a 
+high degree of robustness. 
+ 
+At 5\% variation, or just small deviations from the standard AHP weights,  the standard 
+deviation stays between 0.0015 and 0.0055, while staying between 0.2\% to 1.3\% of the original 
+score.
+
+
+At 10\%, or substantial deviations from the standard AHP weights, the standard deviation 
+stays between 0.0029 and 0.0106, while staying between 0.4\% and 2.4\% of the original score. At 
+15\%, or large deviations from the standard AHP weights, the standard deviation stays between 
+0.0045 and 0.0146, while staying between 0.7\% and 3.3\% of the original score.
+
+
+As shown, our standard deviation increases as we increase the variation of the AHP 
+weights, however, that is to be expected.
+
+
+\subsection{Model Expansion}\label{tocentry:8-3}
+
+To expand our model, one could create rankings for a certain profile of high schooler. Specifically, one could provide a list of the best cities for high schoolers that value education and safety over transportation and economy, or other combinations of criteria. This would be more useful because instead of trying to satisfy a variety of people with our overall rankings, people could pick the profile that they feel resonates with them the most.
+
+Additionally, one could manipulate the AHP matrix to reflect different profiles of a high schooler. For instance, the AHP matrix can be constructed such that education carries a greater weight. Below is an example of a possible AHP matrix using our previous format (with rows and columns ordered as Safety, Education, Transportation, and Economy), with education to be 4 times more important than safety, 5 times more important than Transportation, and 3 times more important than Economy.
+
+\begin{equation*}
+A=\begin{bmatrix}
+1 & \frac{1}{4} & 2 & 2 \\
+4 & 1 & 5 & 3 \\
+\frac{1}{2} & \frac{1}{5} & 1 & 2 \\
+\frac{1}{2} & \frac{1}{3} & \frac{1}{2} & 1
+\end{bmatrix}
+\end{equation*}
+
+These model expansions can be incorporated together to create even greater specificity in ranked cities.
+
+\section{Final Recommendations}\label{tocentry:9-0}
+
+To determine which city is the best for a high schooler to live in, our team collected data from 20 selected cities from around the world and developed a hierarchical mathematical model to turn this data into an overall ranking. The factors we chose were safety, transportation, education, and the economy, then divided up those factors into significant subcriteria.
+
+Our model performed entropy weighing, TOPSIS, and AHP, using data on these criteria from 20 different cities in order to come up with a ranking. Bern, Switzerland ranks the highest, followed by Paris, France and Zurich, Switzerland. These cities ranked the highest because they scored consistently well throughout all four of the criteria: safety, economy, education, and transportation.
+
+On the other hand, of our 20 cities, San Jose, USA was found to be the worst city to live in with a score of 0.2522 with subscores 0.0752, 0.3983, 0.8675, 0.2324 in safety, economy, transportation, and education, respectively. Despite having a high score in transportation, San Jose was still ranked last due to not performing well in the other subcriteria. Meanwhile, Shanghai, China was found to be the second worst city to live in, with a score of 0.2662, with scores 0.2230, 0.1696, 0.3905, 0.4912 in safety, economy, transportation, and education, respectively. Our model prevents a city from being ranked highly based on exceptional performance in only one criterion, since its final score combines performance across all four criteria using AHP-derived weights.
+
+Our robustness analysis, centered around a Monte Carlo analysis, provides evidence that our results are stable under uncertainty in the AHP weights. We used a Monte Carlo analysis to perturb the AHP weights 1000 times for each of 5\% variation, 10\% variation, and 15\% variation, The simulation demonstrated that the scores for our cities changed by a small percentage (less than 4.4\%) when the AHP weights were perturbed by at most 15\%. Also, Bern, Switzerland remained as the number one city throughout all the simulations. This illustrates that our model is not overly dependent on the AHP weights, indicating how our model is balanced and how our model provides similar results despite the possibility of slight error in our AHP weighting.
+
+\section{References}\label{tocentry:10-0}
+[1] Numbeo. (n.d.). Cost of living. \url{https://www.numbeo.com/cost-of-living/}
+
+
+[2] Wise. (n.d.). Cost of living. \url{https://wise.com/us/cost-of-living/}
+
+
+[3] World Bank. (n.d.). Out-of-pocket expenditure per capita on healthcare (current US\$). World 
+Development Indicators. \url{https://data.worldbank.org/indicator/SH.XPD.OOPC.PC.CD}
+
+
+[4] Our World in Data. (n.d.). Out-of-pocket expenditure per capita on healthcare. \url{https://ourworldindata.org/grapher/out-of-pocket-expenditure-per-capita-on-healthcare?country=~USA&utm}
+
+
+[5] ArcGIS. (n.d.). SDG 11.2.1: Share of urban population with convenient access to public 
+transport. \url{https://www.arcgis.com/apps/mapviewer/index.html?url=https://services6.arcgis.com/C0HVLQJI37vYnazu/ArcGIS/rest/services/SDG_11_2_1_Share_of_urban_population_with_convenient_access_to_public_transport_Percent/FeatureServer&source=sd}
+
+
+[6] Evaluating equity of bus stop access in Seattle as of 2020. (2020). ArcGIS StoryMaps. 
+\url{https://storymaps.arcgis.com/stories/9aaec56668a94f0492348d9291f24bc8}
+
+
+[7] ArcGIS StoryMaps. (n.d.). [StoryMap about public transportation accessibility]. \url{https://storymaps.arcgis.com/stories/739a8aed89b6449c96b4fb38ff58bb8b}
+
+
+[8] Familee Travel. (n.d.). Getting around Seoul with kids. \url{https://www.famileetravel.com/getting-around-seoul-with-kids/}
+
+
+[9] Department of Health -- Abu Dhabi. (2018). Department of Health launches open data 
+dashboards. \url{https://www.doh.gov.ae/en/news/doh-launches-open-data-dashboards}
+
+
+[10] International Association of Fire and Rescue Services. (2025). CTIF world fire statistics 
+report No. 30. \url{https://ctif.org/sites/default/files/2025-08/CTIF_Report30.pdf}
+
+
+[11] Police. (n.d.). PubMed Central. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC10288693/}
+
+
+[12] City of Bern. (n.d.). Feuerwehr der Stadt Bern. \url{https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/sue/schutz-und-rettung-bern/feuerwehr-der-stadt-bern}
+
+
+[13] Canton of Bern. (n.d.). Kantonspolizei Bern. \url{https://www.sid.be.ch/de/start/ueber-uns/die-sicherheitsdirektion-sid/kantonspolizei-bern.html}
+
+
+[14] Health Systems Facts. (n.d.). Switzerland health system personnel. \url{https://healthsystemsfacts.org/switzerland/switzerland-health-system-personnel/}
+
+
+[15] Seoul Metropolitan Government. (n.d.). Population of Seoul, Korea. \url{https://english.seoul.go.kr/}
+
+
+[16] Asiae. (2023, August 20). [Article on Seoul police personnel]. \url{https://view.asiae.co.kr/en/article/2023082010084137902}
+
+
+[17] Seoul Metropolitan Council. (n.d.). [Seoul firefighter statistics] [PDF]. \url{https://mas.smc.seoul.kr/attach/record/SEOUL/appendix/a11/A0071251.pdf?time=20260422084235&utm_source=chatgpt.com}
+
+
+[18] Make it in Munich. (n.d.). Health services in Munich. \url{https://www.make-it-in-munich.com/living-in-munich/daily-life/health-services-in-munich/}
+
+
+[19] Feuerwehr Munchen. (n.d.). Information in English. \url{https://www.ffw-muenchen.de/ueber-uns/welcome/information-in-english/}
+
+
+[20] Connexions Project. (n.d.). Munich Police Department. \url{https://connexions-project.eu/partners/consortium/mpd}
+
+
+[21] Ottawa Police Service. (n.d.). Ottawa Police Service. \url{https://www.ottawapolice.ca/}
+
+
+[22] TheGlobalEconomy.com. (n.d.). Canada: Doctors per 1,000 people. \url{https://www.theglobaleconomy.com/Canada/doctors_per_1000_people/}
+
+
+[23] City of Ottawa. (n.d.). [Firefighter staffing report] [PDF]. \url{https://pub-ottawa.escribemeetings.com/filestream.ashx?DocumentId=234689}
+
+
+[24] Hong Kong Police Force. (2024). Police in figures 2024. \url{https://www.police.gov.hk/info/doc/police_in_figure/2024/2024_en.html}
+
+
+[25] Government of the Hong Kong Special Administrative Region. (n.d.). Fire services. \url{https://www.gov.hk/en/about/abouthk/factsheets/docs/fire_services.pdf}
+
+
+[26] Census and Statistics Department. (n.d.). Table 930-92082. \url{https://www.censtatd.gov.hk/en/web_table.html?id=930-92082}
+
+
+[27] Icelandic Police. (n.d.). In Wikipedia. \url{https://en.wikipedia.org/wiki/Icelandic_Police}
+
+
+[28] Capital Region Fire and Rescue Service. (n.d.). Capital Region Fire Service (BS). \url{https://reykjavik.is/en/capital-region-fire-service-bs}
+
+
+[29] Ministry of Health, Singapore. (n.d.). Health manpower. \url{https://www.moh.gov.sg/others/resources-and-statistics/health-manpower/}
+
+
+[30] International Association of Fire and Rescue Services. (n.d.). Singapore. \url{https://ctif.org/country-member/singapore}
+
+
+[31] Singapore Department of Statistics. (2026). Population trends, 2026. \url{https://www.singstat.gov.sg/publication-resources/population-trends-2026}
+
+
+[32] Demographics of Tokyo. (n.d.). In Wikipedia. \url{https://en.wikipedia.org/wiki/Demographics_of_Tokyo}
+
+
+[33] Tokyo Fire Department. (n.d.). In Wikipedia. \url{https://en.wikipedia.org/wiki/Tokyo_Fire_Department}
+
+
+[34] Vancouver Police Department. (n.d.). Executive team. \url{https://vpd.ca/about-the-vpd/executive-team/}
+
+
+[35] City of Vancouver. (2025). Vancouver Fire Rescue Services annual report 2025 [PDF]. 
+\url{https://vancouver.ca/files/cov/annual-report-2025-vfrs.pdf}
+
+
+[36] New York City Police Department. (n.d.). In Wikipedia. \url{https://en.wikipedia.org/wiki/New_York_City_Police_Department}
+
+
+[37] New York City Fire Department. (n.d.). Overview. \url{https://www.nyc.gov/site/fdny/about/overview/overview.page}
+
+
+[38] Ministere de l'Interieur. (n.d.). Police municipale: Effectifs par commune. data.gouv.fr. 
+\url{https://www.data.gouv.fr/datasets/police-municipale-effectifs-par-commune}
+
+
+[39] Institut national de la statistique et des etudes economiques. (n.d.). Serie 010761165. \url{https://www.insee.fr/fr/statistiques/serie/010761165}
+
+
+[40] Defense Zone. (n.d.). La Brigade de sapeurs-pompiers de Paris (BSPP). \url{https://defense-zone.com/en/blogs/news/la-brigade-sapeurs-pompiers-paris-bspp}
+
+
+[41] Seattle police staff briefing [PDF]. (2025, May). \url{https://westseattleblog-assets.s3.amazonaws.com/uploads/2025/05/staffbriefing.pdf}
+
+
+[42] Seattle Fire Department. (n.d.). About the department. \url{https://www.seattle.gov/fire/about-us/about-the-department}
+
+
+[43] Taipei City Government. (n.d.). Taipei police personnel dataset. \url{https://data.taipei/dataset/detail?id=156d710e-a093-4d71-a290-9a17d3c982bc}
+
+
+[44] Taipei City Fire Department. (n.d.). Firefighter statistics. \url{https://english.119.gov.taipei/cp.aspx?n=769F771621216CB7}
+
+
+[45] Physician workforce in Taiwan. (n.d.). PubMed Central. \url{https://pmc.ncbi.nlm.nih.gov/articles/PMC11010689/}
+
+
+[46] Victoria Police. (2019). Victoria Police employee numbers: March 2019 [PDF]. \url{https://content.police.vic.gov.au/sites/default/files/2019-04/Victoria\%20Police\%20Employee\%20numbers\%20Mar\%202019.pdf}
+
+
+[47] BuildStreet. (n.d.). Victoria population. \url{https://buildstreet.com.au/victoria-population/}
+
+
+[48] Victoria Police. (2025). Victoria Police annual report 2024--25: Our people. \url{https://www.police.vic.gov.au/victoria-police-annual-report-2024-25/victoria-police-annual-report-2024-25-our-people}
+
+
+[49] Police Data Initiative. (n.d.). Boston, Massachusetts police. \url{https://www.policedatainitiative.org/participating-agencies/boston-massachusetts-police/}
+
+
+[50] City of Boston. (n.d.). Fire operations. \url{https://www.boston.gov/departments/fire-operations}
+
+
+[51] Healthline. (n.d.). Primary care doctors in San Jose, California. \url{https://care.healthline.com/find-care/specialty/primary-care-doctors/ca/san-jose}
+
+
+[52] HouseBerry. (n.d.). San Jose police districts redrawn: 16 to 12. \url{https://www.houseberry.com/blog/san-jose-police-districts-redrawn-16-to-12/}
+
+
+[53] City of San Jose. (n.d.). About the San Jose Fire Department. \url{https://www.sanjoseca.gov/your-government/departments-offices/fire-department/about-sjfd}
+
+
+[54] Kantonspolizei Zurich. (n.d.). In Wikipedia. \url{https://en.wikipedia.org/wiki/Kantonspolizei_Z\%C3\%BCrich}
+
+
+[55] Shanghai Municipal Public Security Bureau. (n.d.). In Wikipedia. \url{https://en.wikipedia.org/wiki/Shanghai_Municipal_Public_Security_Bureau}
+
+
+[56] Shanghai Municipal Fire and Rescue Bureau. (n.d.). Baidu Baike. \url{https://baike.baidu.com/en/item/Shanghai\%20Municipal\%20Fire\%20and\%20Rescue\%20Bureau/942093}
+
+
+[57] Trading Economics. (n.d.). China unemployment rate. \url{https://tradingeconomics.com/china/unemployment-rate}
+
+
+[58] Ministry of Data and Statistics, Republic of Korea. (n.d.). Korean statistical information 
+service. \url{https://mods.go.kr/anse/}
+
+
+[59] Organization for Economic Co-operation and Development. (2025). Health at a glance 
+2025: Country notes -- Switzerland \url{https://www.oecd.org/en/publications/2025/11/health-at-a-glance-2025-country-notes_2f94481e/switzerland_366ce195.html}
+
+
+
+
+
+\clearpage
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\begin{center}\textbf{Report on the Use of AI:}\end{center}
+\begin{center}We used Google's Gemini (November 2026) and ChatGPT's GPT-6 Sol for several tasks during this competition:\end{center}
+\medskip
+\noindent\textbf{1. Finding Data for Subcriteria}
+
+We used Google Gemini and GPT (GPT-6.1) to assist with finding data. We used AI to suggest sources for cities with less available data to give us a more holistic view on the sources that were available. We manually checked the data on each of the sources suggested, and used AI to confirm our numbers.
+
+Sample Query and Output:
+
+\noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+Google Gemini [60] (November 2026)
+
+Prompt 1:
+
+How do we read the Victoria Police location data when the numbers are reported in decimals, and how should we round those numbers for our model?
+
+\medskip\hrule\medskip
+Response 1:
+
+The decimal numbers in Victoria Police's regional and precinct datasets (such as the quarterly \emph{Employee Numbers by Location} records for the North West Metro Region) represent \textbf{Full-Time Equivalent (FTE)} headcounts rather than integer person counts. Because police agencies account for part-time officers, job-sharing arrangements, and fractional shifts, individual station rosters are logged as precise decimals (e.g., 153. 84 or 198. 37 FTE).
+
+You should not round these FTE decimals prior to running your data pipeline. Keeping full floating-point precision when summing precinct rosters (such as combining PSA Melbourne East and PSA Melbourne West), calculating per-capita densities against population denominators, and executing Min-Max normalization prevents rounding artifacts and compounding error in your entropy weights and TOPSIS matrix calculations. Rounding should be deferred strictly to your final presentation tables (e.g., 2 decimal places for personnel density metrics and 4 decimal places for final CWS/TOPSIS scores).
+\end{minipage}}
+
+\medskip
+\noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+Google Gemini [60] (November 2026)
+
+Prompt 2:
+
+What are the exact personnel headcounts for Melbourne CBD police stations (PSA Melbourne East and PSA Melbourne West)?
+
+\medskip\hrule\medskip
+Response 2:
+
+Finding exact personnel headcounts for specific inner-city police stations like \textbf{PSA Melbourne East and PSA Melbourne West} can be challenging because Victoria Police reports these numbers in quarterly Full-Time Equivalent (FTE) PDF datasets rather than simple web-searchable tables.
+
+To get the exact figures, look directly at the quarterly ``Employee numbers by location'' reports published on the official Victoria Police Employee Numbers by Location Portal.
+
+How to Extract the Numbers from the Datasets
+\begin{enumerate}[leftmargin=2em,itemsep=0pt,topsep=2pt]
+\item Open the latest quarterly PDF (e.g., June or September releases) from the portal.
+\item Navigate to the section for the North West Metro Region (NWMR) $\rightarrow$ Division 1.
+\item Locate the rows designated for the central business district Police Service Areas:
+\begin{itemize}[leftmargin=1.4em,itemsep=0pt,topsep=0pt]
+\item PSA Melbourne East - ND1 (covering Melbourne East Police Station at 202 Bourke St)
+\item PSA Melbourne West - ND1 (covering Melbourne West Police Station at 313 Spencer St, Docklands)
+\end{itemize}
+\end{enumerate}
+Typical Range \& Format
+
+Because staffing fluctuates slightly quarter-to-quarter and accounts for fractional part-time shifts, these rows typically record exact FTE allocations in the following range:
+\begin{itemize}[leftmargin=2em,itemsep=0pt,topsep=2pt]
+\item PSA Melbourne East: Roughly 120--155$FTE$
+\item PSA Melbourne West: Roughly 160--200$FTE$
+\item Combined CBD Core Stations: Approximately 320--350$FTE$ active personnel deployed across those two central PSAs.
+\end{itemize}
+\end{minipage}}
+
+\medskip
+\noindent\textbf{2. Formatting Data and Creating Diagrams.}
+
+We used GPT (GPT-6.1) to format data into tables. Many of our tables underwent many edits via AI to create easier-to-read formats. AI was also prompted with specific instructions to generate diagrams of our processes.
+
+Sample Query and Output:
+
+\noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+OpenAI ChatGPT GPT-6.1 Sol Pro accessed through OpenCode/OpenChamber via Openrouter. [63]
+
+Prompt 3:
+
+Please make this into a graph of cities as different rows, and indicators as different columns.
+\end{minipage}}
+
+\medskip
+\noindent\textbf{Response 3:}
+
+\begin{center}\includegraphics[width=0.88\linewidth]{ai_response3_original.png}\end{center}
+
+\medskip
+\noindent\textbf{3. Coding Assistance}
+
+AI was used to help generate and edit existing Python and LaTeX code. After generating code, we reread and verified that the code serves the intended purpose.
+
+Sample Query and Output:
+
+\noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+OpenAI ChatGPT GPT-6.1 Sol Pro accessed through OpenCode/OpenChamber via Openrouter. [63]
+
+Prompt 4: Can you write python code that converts a list variable diversity = 1 - entropy into weights, where a subtopic's diversity is divided by the sum of all other subtopics' diversity values. Also, please add an if statement that makes list variable weights with all 0s if all diversity values are 0.
+
+\medskip\hrule\medskip
+Response 4:
+
+\begingroup\ttfamily\small\par
+\# Step 1: Calculate diversity coefficients\par
+diversity = 1 - entropy\par
+\medskip
+\# Step 2: Convert diversity values into weights\par
+if sum(diversity) == 0:\par
+\hspace*{1.5em}weights = [0] * len(diversity)\par
+else:\par
+\hspace*{1.5em}weights = [d / sum(diversity) for d in diversity]\par
+\endgroup
+
+How it works:
+\begin{itemize}[leftmargin=2em,itemsep=2pt]
+\item \texttt{diversity = 1 - entropy} calculates each subtopic's diversity.
+\item \texttt{sum(diversity)} calculates the total diversity across all subtopics.
+\item \texttt{d / sum(diversity)} divides each subtopic's diversity by the total diversity.
+\item The \texttt{if} statement checks whether all diversity values are zero. If so, every weight is set to 0.
+\end{itemize}
+\end{minipage}}
+\endgroup
+
+\end{document}
